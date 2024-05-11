@@ -2,7 +2,7 @@ class_name Player
 extends CharacterBody2D
 
 @export var acceleration: float = 300.0
-@export var decelaration: float = 100.0
+@export var deceleration: float = 100.0
 @export var max_velocity: float = 150.0
 
 var is_accelerating: bool = false
@@ -12,15 +12,12 @@ var mouse_position: Vector2 = Vector2.ZERO
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouse:
 		mouse_position = event.global_position
-	if event is InputEventKey:
-		match event.keycode:
-			KEY_SPACE:
-				is_accelerating = event.pressed
-
+	if event.is_action("accelerate"):
+		is_accelerating = event.is_pressed()
 
 func _physics_process(delta: float) -> void:
-	# decelarate
-	velocity = velocity.move_toward(Vector2.ZERO, delta * decelaration)
+	# decelerate
+	velocity = velocity.move_toward(Vector2.ZERO, delta * deceleration)
 
 	# accelarate towards cursor
 	if is_accelerating:

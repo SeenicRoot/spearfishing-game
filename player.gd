@@ -19,7 +19,7 @@ func _physics_process(delta: float) -> void:
 	# decelerate
 	velocity = velocity.move_toward(Vector2.ZERO, delta * deceleration)
 
-	# accelarate towards cursor
+	# accelerate towards cursor
 	if is_accelerating:
 		var direction := (mouse_position - global_position).normalized()
 		velocity += direction * acceleration * delta

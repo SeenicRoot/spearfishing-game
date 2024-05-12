@@ -2,9 +2,24 @@
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_yibih"]
 [ext_resource type="Texture2D" uid="uid://bvng2rxvvfyvc" path="res://assets/SpearFishing Assets Pack/Sprites/Diver-32x32/Diver 5.png" id="2_pblo8"]
-[ext_resource type="PackedScene" uid="uid://cd6454ruaexhd" path="res://player/harpoon.tscn" id="3_ubeoq"]
+[ext_resource type="PackedScene" uid="uid://cd6454ruaexhd" path="res://player/harpoon_launcher.tscn" id="3_ubeoq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bb6da"]
+
+[sub_resource type="Animation" id="Animation_vmio7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [15]
+}
 
 [sub_resource type="Animation" id="Animation_in2y5"]
 resource_name = "swim"
@@ -21,21 +36,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [15, 16, 17, 18]
-}
-
-[sub_resource type="Animation" id="Animation_vmio7"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [15]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5oiao"]
@@ -67,7 +67,6 @@ frame = 15
 position = Vector2(1, -4)
 shape = SubResource("CircleShape2D_p2o5f")
 
-[node name="Harpoon" parent="." instance=ExtResource("3_ubeoq")]
+[node name="HarpoonLauncher" parent="." instance=ExtResource("3_ubeoq")]
 z_index = -1
 position = Vector2(8, -1)
-rotation = -2.03505

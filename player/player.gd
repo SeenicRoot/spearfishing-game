@@ -15,8 +15,7 @@ var flipped: bool = false
 var can_rotate_sprite: bool = true
 
 @onready var sprite: Sprite2D = $Sprite2D
-@onready var harpoon: Node2D = $Harpoon
-@onready var harpoon_x_offset: float = harpoon.position.x
+@onready var harpoon_launcher: HarpoonLauncher = $HarpoonLauncher
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 
@@ -31,7 +30,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		is_accelerating = event.is_pressed()
 	if event.is_action("shoot"):
 		if harpoon_ready:
-			shoot(mouse_position)
+			shoot()
 
 
 func _physics_process(delta: float) -> void:
@@ -63,21 +62,20 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
-	# point harpoon at mouse position
-	harpoon.global_rotation = direction.angle() 
-	if abs(rad_to_deg(harpoon.rotation)) > 90 and not flipped:
+	# point harpoon_launcher at mouse position
+	harpoon_launcher.global_rotation = direction.angle() 
+	if abs(rad_to_deg(harpoon_launcher.rotation)) > 90 and not flipped:
 		flip_player()
-	elif abs(rad_to_deg(harpoon.rotation)) < 90 and flipped:
+	elif abs(rad_to_deg(harpoon_launcher.rotation)) < 90 and flipped:
 		flip_player()
 
 
 func flip_player() -> void:
-	var harpoon_sprite := harpoon.get_node("Sprite2D") as Sprite2D
-	harpoon.position.x = -harpoon.position.x
+	harpoon_launcher.position.x = -harpoon_launcher.position.x
+	harpoon_launcher.scale.y = -harpoon_launcher.scale.y
 	sprite.flip_h = not sprite.flip_h
-	harpoon_sprite.flip_v = not harpoon_sprite.flip_v
 	flipped = not flipped
 		
 
-func shoot(at_position: Vector2) -> void:
-	pass
+func shoot() -> void:
+	harpoon_launcher.shoot()

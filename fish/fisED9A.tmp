@@ -1,0 +1,61 @@
+[gd_scene load_steps=9 format=3 uid="uid://biip1hld5vpp0"]
+
+[ext_resource type="Texture2D" uid="uid://biumrsy1rpmpq" path="res://assets/SpearFishing Assets Pack/SpearFishing Assets Pack/Sprites/Fish1 - 16x16/Orange.png" id="1_26xgt"]
+[ext_resource type="Script" path="res://fish/fish.gd" id="1_reuv0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0n2e2"]
+atlas = ExtResource("1_26xgt")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qrj0s"]
+atlas = ExtResource("1_26xgt")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8mn3e"]
+atlas = ExtResource("1_26xgt")
+region = Rect2(64, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_llc1x"]
+atlas = ExtResource("1_26xgt")
+region = Rect2(96, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_aierh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0n2e2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qrj0s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8mn3e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_llc1x")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e5rhc"]
+
+[node name="fish" type="CharacterBody2D"]
+script = ExtResource("1_reuv0")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(184, 93)
+sprite_frames = SubResource("SpriteFrames_aierh")
+autoplay = "default"
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(183, 95)
+shape = SubResource("CircleShape2D_e5rhc")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

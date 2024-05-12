@@ -5,9 +5,8 @@ var is_open = false
 func _ready():
 	close()
 	
-
 func open(): 
-	visible = true
+	self.visible = true
 	is_open = true
 
 func close():
@@ -16,6 +15,7 @@ func close():
 	
 func _process(delta):
 	if Input.is_action_just_pressed("i"):
+		print("i")
 		if is_open:
 			close()
 		else:

@@ -23,6 +23,7 @@ region_enabled = true
 region_rect = Rect2(2, 8, 20, 11)
 
 [node name="Harpoon" type="Area2D" parent="."]
+visible = false
 top_level = true
 position = Vector2(13, -4)
 

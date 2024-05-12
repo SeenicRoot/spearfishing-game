@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cd6454ruaexhd"]
+
+[ext_resource type="Texture2D" uid="uid://ddl464tueycrq" path="res://assets/SpearFishing Assets Pack/Sprites/Harpoon.png" id="1_dc7sv"]
+
+[node name="Harpoon" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(10, -2)
+texture = ExtResource("1_dc7sv")
+region_enabled = true
+region_rect = Rect2(0, 8, 32, 11)

@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://cd6454ruaexhd"]
+
+[ext_resource type="Texture2D" uid="uid://ddl464tueycrq" path="res://assets/SpearFishing Assets Pack/Sprites/Harpoon.png" id="1_dc7sv"]
+[ext_resource type="Script" path="res://player/harpoon_launcher.gd" id="1_trycl"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3ngmn"]
+radius = 4.0
+
+[node name="HarpoonLauncher" type="Node2D"]
+script = ExtResource("1_trycl")
+
+[node name="LoadedSprite" type="Sprite2D" parent="."]
+position = Vector2(9, -3)
+texture = ExtResource("1_dc7sv")
+region_enabled = true
+region_rect = Rect2(2, 21, 26, 11)
+
+[node name="UnloadedSprite" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(7, -2)
+texture = ExtResource("1_dc7sv")
+region_enabled = true
+region_rect = Rect2(2, 8, 20, 11)
+
+[node name="Harpoon" type="Area2D" parent="."]
+visible = false
+top_level = true
+position = Vector2(13, -4)
+
+[node name="Sprite2D" type="Sprite2D" parent="Harpoon"]
+position = Vector2(-4, -1)
+texture = ExtResource("1_dc7sv")
+offset = Vector2(0, 1)
+region_enabled = true
+region_rect = Rect2(3, 2, 25, 5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Harpoon"]
+position = Vector2(8, 0)
+shape = SubResource("CircleShape2D_3ngmn")

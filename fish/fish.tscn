@@ -1,38 +1,38 @@
 [gd_scene load_steps=9 format=3 uid="uid://biip1hld5vpp0"]
 
-[ext_resource type="Texture2D" uid="uid://biumrsy1rpmpq" path="res://assets/SpearFishing Assets Pack/SpearFishing Assets Pack/Sprites/Fish1 - 16x16/Orange.png" id="1_26xgt"]
 [ext_resource type="Script" path="res://fish/fish.gd" id="1_reuv0"]
+[ext_resource type="Texture2D" uid="uid://cuc2xp8rby7es" path="res://assets/SpearFishing Assets Pack/Sprites/Fish1 - 16x16/Orange.png" id="2_ooy0t"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_0n2e2"]
-atlas = ExtResource("1_26xgt")
+[sub_resource type="AtlasTexture" id="AtlasTexture_46w37"]
+atlas = ExtResource("2_ooy0t")
 region = Rect2(0, 16, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qrj0s"]
-atlas = ExtResource("1_26xgt")
+[sub_resource type="AtlasTexture" id="AtlasTexture_1n0jd"]
+atlas = ExtResource("2_ooy0t")
 region = Rect2(32, 16, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8mn3e"]
-atlas = ExtResource("1_26xgt")
+[sub_resource type="AtlasTexture" id="AtlasTexture_sivjj"]
+atlas = ExtResource("2_ooy0t")
 region = Rect2(64, 16, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_llc1x"]
-atlas = ExtResource("1_26xgt")
+[sub_resource type="AtlasTexture" id="AtlasTexture_iu7bp"]
+atlas = ExtResource("2_ooy0t")
 region = Rect2(96, 16, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_aierh"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_0n2e2")
+"texture": SubResource("AtlasTexture_46w37")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_qrj0s")
+"texture": SubResource("AtlasTexture_1n0jd")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_8mn3e")
+"texture": SubResource("AtlasTexture_sivjj")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_llc1x")
+"texture": SubResource("AtlasTexture_iu7bp")
 }],
 "loop": true,
 "name": &"default",

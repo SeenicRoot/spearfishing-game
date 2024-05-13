@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_yibih"]
 [ext_resource type="Texture2D" uid="uid://bvng2rxvvfyvc" path="res://assets/SpearFishing Assets Pack/Sprites/Diver-32x32/Diver 5.png" id="2_pblo8"]
-[ext_resource type="PackedScene" path="res://player/harpoon_launcher.tscn" id="3_ubeoq"]
+[ext_resource type="PackedScene" uid="uid://cd6454ruaexhd" path="res://player/harpoon_launcher.tscn" id="3_ubeoq"]
 
 [sub_resource type="Animation" id="Animation_vmio7"]
 length = 0.001

@@ -1,10 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://bpumku3jmxiy2"]
+[gd_scene load_steps=8 format=3 uid="uid://bpumku3jmxiy2"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_yibih"]
 [ext_resource type="Texture2D" uid="uid://bvng2rxvvfyvc" path="res://assets/SpearFishing Assets Pack/Sprites/Diver-32x32/Diver 5.png" id="2_pblo8"]
 [ext_resource type="PackedScene" path="res://player/harpoon_launcher.tscn" id="3_ubeoq"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_bb6da"]
 
 [sub_resource type="Animation" id="Animation_vmio7"]
 length = 0.001
@@ -47,7 +45,6 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_p2o5f"]
 
 [node name="Player" type="CharacterBody2D"]
-material = SubResource("ShaderMaterial_bb6da")
 script = ExtResource("1_yibih")
 acceleration = 125.0
 max_velocity = 100.0

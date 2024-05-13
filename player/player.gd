@@ -26,7 +26,7 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouse:
 		mouse_position = event.global_position
-	if event.is_action_pressed("accelerate"):
+	if event.is_action("accelerate"):
 		is_accelerating = event.is_pressed()
 	if event.is_action_pressed("shoot"):
 		if harpoon_ready:

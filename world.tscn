@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://dinwsk6yoe6t3"]
+
+[sub_resource type="Gradient" id="Gradient_ot0v7"]
+colors = PackedColorArray(0, 0, 0, 0.0784314, 1, 1, 1, 0.0784314)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_lwpfe"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_c488q"]
+width = 2000
+height = 2000
+color_ramp = SubResource("Gradient_ot0v7")
+noise = SubResource("FastNoiseLite_lwpfe")
+
+[node name="World" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("NoiseTexture2D_c488q")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true

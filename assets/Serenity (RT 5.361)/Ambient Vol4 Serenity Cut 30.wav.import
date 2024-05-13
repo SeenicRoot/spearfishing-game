@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dan14hxcwd2sx"
+path="res://.godot/imported/Ambient Vol4 Serenity Cut 30.wav-5e21eaee8295056e5eccca8419286594.sample"
+
+[deps]
+
+source_file="res://assets/Serenity (RT 5.361)/Ambient Vol4 Serenity Cut 30.wav"
+dest_files=["res://.godot/imported/Ambient Vol4 Serenity Cut 30.wav-5e21eaee8295056e5eccca8419286594.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

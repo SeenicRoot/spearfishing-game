@@ -7,15 +7,21 @@ var speed = 60
 
 var is_fish_moving: bool
 var is_fish_being_attacked: bool
+var is_fish_hooked: bool
 @onready var timer = $Timer
 
 func _ready():
 	direction = Vector2.LEFT
+	is_fish_hooked = false
 	is_fish_moving = false
 	is_fish_being_attacked = false
 	
 func move(delta):
-	if is_fish_being_attacked:
+	if is_fish_hooked:
+		## Unable to act, dragged towards the player
+		## if harpoon collides fish hitbox, capture
+		is_fish_hooked = false
+	elif is_fish_being_attacked:
 		speed = 120
 		velocity += direction * speed * delta
 		velocity = velocity.limit_length(100.0)
@@ -36,19 +42,17 @@ func _on_timer_timeout():
 		if direction.x == -1:
 			direction = random([Vector2.LEFT, Vector2.UP, Vector2.DOWN])
 			animated_sprite_2d.flip_h = true
-			print(direction)
-			print(is_fish_being_attacked)
 			
 		elif direction.x == 1:
 			direction = random([Vector2.RIGHT, Vector2.UP, Vector2.DOWN])
 			animated_sprite_2d.flip_h = false
-			print(direction)
-			print(is_fish_being_attacked)
 			
 		elif direction.x == 0:
 			direction = random([Vector2.LEFT, Vector2.RIGHT, Vector2.UP, Vector2.DOWN])
-			print(direction)
-			print(is_fish_being_attacked)
+
+func hooked():
+	## if harpoon hits fish
+	is_fish_hooked= true;
 
 func random(array):
 	array.shuffle()

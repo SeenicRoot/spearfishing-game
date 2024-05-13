@@ -48,4 +48,4 @@ func _on_timer_timeout() -> void:
 
 func hooked() -> void:
 	## if harpoon hits fish
-	is_fish_hooked= true;
+	is_fish_hooked = true;

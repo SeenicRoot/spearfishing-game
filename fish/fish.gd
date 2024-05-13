@@ -8,8 +8,8 @@ var is_fish_moving: bool = false
 var is_fish_being_attacked: bool = false
 var is_fish_hooked: bool = false
 
-@onready var animated_sprite_2d = $AnimatedSprite2D
-@onready var timer = $Timer
+@onready var animated_sprite_2d := $AnimatedSprite2D as AnimatedSprite2D
+@onready var timer := $Timer as Timer
 
 
 func move(delta: float) -> void:

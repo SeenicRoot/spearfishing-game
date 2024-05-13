@@ -1,22 +1,18 @@
 extends CharacterBody2D
 
+@export var speed: float = 60
+
+var direction: Vector2 = Vector2.LEFT
+
+var is_fish_moving: bool = false
+var is_fish_being_attacked: bool = false
+var is_fish_hooked: bool = false
+
 @onready var animated_sprite_2d = $AnimatedSprite2D
-
-var direction: Vector2
-var speed = 60
-
-var is_fish_moving: bool
-var is_fish_being_attacked: bool
-var is_fish_hooked: bool
 @onready var timer = $Timer
 
-func _ready():
-	direction = Vector2.LEFT
-	is_fish_hooked = false
-	is_fish_moving = false
-	is_fish_being_attacked = false
-	
-func move(delta):
+
+func move(delta: float) -> void:
 	if is_fish_hooked:
 		## Unable to act, dragged towards the player
 		## if harpoon collides fish hitbox, capture
@@ -32,28 +28,24 @@ func move(delta):
 	move_and_slide()
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	move(delta)
 
-func _on_timer_timeout():
-	timer.wait_time = random([1.0, 1.5, 2.0])
-	is_fish_being_attacked = random([false, true])
+func _on_timer_timeout() -> void:
+	timer.wait_time = [1.0, 1.5, 2.0].pick_random()
+	is_fish_being_attacked = [false, true].pick_random()
 	if !is_fish_moving:
 		if direction.x == -1:
-			direction = random([Vector2.LEFT, Vector2.UP, Vector2.DOWN])
+			direction = [Vector2.LEFT, Vector2.UP, Vector2.DOWN].pick_random()
 			animated_sprite_2d.flip_h = true
 			
 		elif direction.x == 1:
-			direction = random([Vector2.RIGHT, Vector2.UP, Vector2.DOWN])
+			direction = [Vector2.RIGHT, Vector2.UP, Vector2.DOWN].pick_random()
 			animated_sprite_2d.flip_h = false
 			
 		elif direction.x == 0:
-			direction = random([Vector2.LEFT, Vector2.RIGHT, Vector2.UP, Vector2.DOWN])
+			direction = [Vector2.LEFT, Vector2.RIGHT, Vector2.UP, Vector2.DOWN].pick_random()
 
-func hooked():
+func hooked() -> void:
 	## if harpoon hits fish
 	is_fish_hooked= true;
-
-func random(array):
-	array.shuffle()
-	return array.front()

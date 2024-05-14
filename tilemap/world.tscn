@@ -4,7 +4,7 @@
 [ext_resource type="Shader" path="res://tilemap/TileMap.gdshader" id="1_sb7qn"]
 [ext_resource type="Script" path="res://tilemap/TileMap.gd" id="3_8cfqe"]
 [ext_resource type="Script" path="res://tilemap/camera_test.gd" id="4_o8edr"]
-[ext_resource type="TileSet" uid="uid://cfubv55h0kkil" path="res://tilemap/water_tileset.tres" id="4_swkwh"]
+[ext_resource type="TileSet" uid="uid://c6l48pd00c62j" path="res://tilemap/water_tileset.tres" id="4_swkwh"]
 
 [sub_resource type="Curve2D" id="Curve2D_yks4t"]
 _data = {

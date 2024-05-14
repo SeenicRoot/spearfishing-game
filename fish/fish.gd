@@ -60,4 +60,3 @@ func change_sprite_direction() -> void:
 		animated_sprite_2d.flip_h = true
 	else:
 		animated_sprite_2d.flip_h = false
-	

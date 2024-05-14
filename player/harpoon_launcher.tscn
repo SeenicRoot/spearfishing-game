@@ -35,5 +35,7 @@ region_enabled = true
 region_rect = Rect2(3, 2, 25, 5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Harpoon"]
-position = Vector2(8, 0)
+position = Vector2(5, 0)
 shape = SubResource("CircleShape2D_3ngmn")
+
+[connection signal="body_entered" from="Harpoon" to="." method="_on_harpoon_body_entered"]

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://tilemap/world.gd" id="1_8jdv1"]
 [ext_resource type="Shader" path="res://tilemap/TileMap.gdshader" id="1_sb7qn"]
-[ext_resource type="Texture2D" uid="uid://c4nol5sk25b42" path="res://assets/Water+.png" id="2_x726s"]
+[ext_resource type="Texture2D" path="res://assets/Water+.png" id="2_x726s"]
 [ext_resource type="Script" path="res://tilemap/TileMap.gd" id="3_8cfqe"]
 [ext_resource type="Script" path="res://tilemap/camera_test.gd" id="4_o8edr"]
 

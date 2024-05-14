@@ -10,9 +10,7 @@ func _ready():
 	randomize()
 
 func _on_spawn_timer_timeout():
-	var spawn = RandomNumberGenerator.new()
-	spawn.randomize()
-	path_follow_2d.progress = spawn.randi_range(0, 1000)
+	path_follow_2d.progress = randi_range(0, 1000)
 	var instance = fish.instantiate()
 	
 	instance.global_position = marker_2d.global_position

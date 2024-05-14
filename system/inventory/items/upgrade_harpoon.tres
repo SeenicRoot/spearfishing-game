@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="InvItem" load_steps=3 format=3 uid="uid://scun3yt32ctn"]
+
+[ext_resource type="Script" path="res://system/inventory/inventory_items.gd" id="1_xjelw"]
+[ext_resource type="Texture2D" uid="uid://ddl464tueycrq" path="res://assets/SpearFishing Assets Pack/Sprites/Harpoon.png" id="2_b45f3"]
+
+[resource]
+script = ExtResource("1_xjelw")
+name = "upgrade_harpoon"
+texture = ExtResource("2_b45f3")

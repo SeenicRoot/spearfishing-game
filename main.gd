@@ -12,6 +12,8 @@ var world_camera: Camera2D
 var player: CharacterBody2D
 var is_surfaced: bool = true
 
+var total_points: int
+var dive_points: int
 
 func _ready() -> void:
 	for child in get_children():
@@ -47,7 +49,8 @@ func start_game() -> void:
 	
 	player = player_scene.instantiate() as CharacterBody2D
 	world.add_child(player)
-
+	player.harpoon_launcher.captured_fish.connect(_on_captured_fish)
+	
 	game_running = true
 	
 	
@@ -58,10 +61,11 @@ func start_music() -> void:
 	music_player.volume_db = -20
 	add_child(music_player)
 
-
 func _on_surface_body_entered(body: Node2D) -> void:
 	if body.name == "Player":
 		is_surfaced = true
+		total_points += dive_points
+		dive_points = 0
 
 	else:
 		body.queue_free()
@@ -70,3 +74,7 @@ func _on_surface_body_entered(body: Node2D) -> void:
 func _on_surface_body_exited(body: Node2D) -> void:
 	if body.name == "Player":
 		is_surfaced = false
+
+func _on_captured_fish(fish: Fish) -> void:
+	dive_points += fish.point_value
+	

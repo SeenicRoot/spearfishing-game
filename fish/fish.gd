@@ -4,6 +4,7 @@ extends CharacterBody2D
 const VELOCITY_LIMIT: float = 50.0
 
 @export var speed: float = 60
+@export var point_value: int = 5
 
 var direction: Vector2
 var previous_direction: Vector2

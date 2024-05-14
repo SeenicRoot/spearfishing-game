@@ -31,9 +31,4 @@ func start_game() -> void:
 	add_child(world)
 	player = player_scene.instantiate() as CharacterBody2D
 	world.add_child(player)
-	player.item_rect_changed.connect(_on_player_rect_changed)
 	game_running = true
-	
-
-func _on_player_rect_changed() -> void:
-	world.get_node("Camera2D").global_position = player.global_position

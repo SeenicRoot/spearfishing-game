@@ -9,6 +9,8 @@ var is_fish_moving: bool = false
 var is_fish_being_attacked: bool = false
 var is_fish_hooked: bool = false
 
+const velocity_limit: float = 50.0
+
 @onready var animated_sprite_2d := $AnimatedSprite2D as AnimatedSprite2D
 @onready var timer := $Timer as Timer
 
@@ -21,12 +23,12 @@ func move(delta: float) -> void:
 		speed = 120
 		sprite_direction(direction)
 		velocity += direction * speed * delta
-		velocity = velocity.limit_length(50.0)
+		velocity = velocity.limit_length(velocity_limit)
 	elif !is_fish_moving:
 		speed = 60
 		sprite_direction(direction)
 		velocity += direction * speed * delta
-		velocity = velocity.limit_length(25.0)
+		velocity = velocity.limit_length(velocity_limit/2)
 	move_and_slide()
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -17,6 +17,7 @@ func _ready() -> void:
 	for child in get_children():
 		queue_free()
 	start_game()
+	start_music()
 
 
 func _process(_delta: float) -> void:

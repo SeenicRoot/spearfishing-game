@@ -9,7 +9,6 @@ const ROTATE_COOLDOWN = 0.25
 @export var max_velocity: float = 150.0
 
 var is_accelerating: bool = false
-var mouse_position: Vector2 = Vector2.ZERO
 var harpoon_ready: bool = true
 var flipped: bool = false
 var can_rotate_sprite: bool = true
@@ -24,8 +23,6 @@ func _ready() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion:
-		mouse_position = get_global_mouse_position()
 	if event.is_action("accelerate"):
 		is_accelerating = event.is_pressed()
 	if event.is_action_pressed("shoot"):
@@ -34,6 +31,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _physics_process(delta: float) -> void:
+	var mouse_position := get_global_mouse_position()
 	var direction := (mouse_position - global_position).normalized()
 
 	# decelerate

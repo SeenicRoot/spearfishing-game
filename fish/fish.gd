@@ -22,12 +22,12 @@ func move(delta: float) -> void:
 		is_hooked = false
 	elif is_being_attacked:
 		speed = 120
-		sprite_direction(direction)
+		change_sprite_direction()
 		velocity += direction * speed * delta
 		velocity = velocity.limit_length(velocity_limit)
 	elif !is_moving:
 		speed = 60
-		sprite_direction(direction)
+		change_sprite_direction()
 		velocity += direction * speed * delta
 		velocity = velocity.limit_length(velocity_limit/2)
 	move_and_slide()
@@ -58,7 +58,7 @@ func _on_timer_timeout() -> void:
 				direction = [Vector2.LEFT, Vector2.RIGHT, Vector2.DOWN].pick_random()
 		previous_direction = direction
 	
-func sprite_direction(direction: Vector2) -> void:
+func change_sprite_direction() -> void:
 	if direction.x == -1:
 		animated_sprite_2d.flip_h = true
 	else:

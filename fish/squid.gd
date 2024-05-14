@@ -7,11 +7,11 @@ func move(delta: float) -> void:
 		is_hooked = false
 	elif is_being_attacked:
 		speed = 2000
-		sprite_direction(direction)
+		change_sprite_direction()
 		velocity += direction * speed * delta
 	elif !is_moving:
 		speed = 1000
-		sprite_direction(direction)
+		change_sprite_direction()
 		velocity += direction * speed * delta
 	move_and_slide()
 	velocity = direction * 0
@@ -25,12 +25,6 @@ func _on_timer_timeout() -> void:
 	is_being_attacked = [false, true].pick_random()
 	if !is_moving:
 		direction = [Vector2.LEFT, Vector2.RIGHT].pick_random()
-
-func sprite_direction(direction: Vector2) -> void:
-	if direction.x == -1:
-		animated_sprite_2d.flip_h = true
-	else:
-		animated_sprite_2d.flip_h = false
 
 func hooked() -> void:
 	## if harpoon hits fish

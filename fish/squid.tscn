@@ -1,0 +1,113 @@
+[gd_scene load_steps=9 format=3 uid="uid://buxpbplq2hixr"]
+
+[ext_resource type="Texture2D" uid="uid://cg5r6b16juhy3" path="res://assets/SpearFishing Assets Pack/Sprites/Squid - 32x16.png" id="1_5m8dh"]
+
+[sub_resource type="GDScript" id="GDScript_0nvbb"]
+script/source = "extends CharacterBody2D
+
+@export var speed: float = 15
+
+var direction: Vector2
+
+var is_squid_moving: bool = false
+var is_squid_being_attacked: bool = false
+var is_squid_hooked: bool = false
+
+@onready var animated_sprite_2d := $AnimatedSprite2D as AnimatedSprite2D
+@onready var timer := $Timer as Timer
+
+func move(delta: float) -> void:
+	if is_squid_hooked:
+		## Unable to act, dragged towards the player
+		## if harpoon collides fish hitbox, capture
+		is_squid_hooked = false
+	elif is_squid_being_attacked:
+		speed = 2000
+		sprite_direction(direction)
+		velocity += direction * speed * delta
+	elif !is_squid_moving:
+		speed = 1000
+		sprite_direction(direction)
+		velocity += direction * speed * delta
+	move_and_slide()
+	velocity = direction * 0
+	
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _physics_process(delta: float) -> void:
+	move(delta)
+
+func _on_timer_timeout() -> void:
+	timer.wait_time = 2.0
+	is_squid_being_attacked = [false, true].pick_random()
+	if !is_squid_moving:
+		direction = [Vector2.LEFT, Vector2.RIGHT].pick_random()
+
+func sprite_direction(direction: Vector2) -> void:
+	if direction.x == -1:
+		animated_sprite_2d.flip_h = true
+	else:
+		animated_sprite_2d.flip_h = false
+
+func hooked() -> void:
+	## if harpoon hits fish
+	is_squid_hooked = true;
+	
+"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j6k5v"]
+atlas = ExtResource("1_5m8dh")
+region = Rect2(0, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rndh5"]
+atlas = ExtResource("1_5m8dh")
+region = Rect2(32, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3u0mo"]
+atlas = ExtResource("1_5m8dh")
+region = Rect2(64, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_36in0"]
+atlas = ExtResource("1_5m8dh")
+region = Rect2(96, 0, 32, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y08gg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j6k5v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rndh5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3u0mo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_36in0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_f2pne"]
+radius = 6.0
+
+[node name="squid" type="CharacterBody2D"]
+script = SubResource("GDScript_0nvbb")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_y08gg")
+autoplay = "default"
+frame = 3
+frame_progress = 1.0
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 0)
+shape = SubResource("CircleShape2D_f2pne")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -11,7 +11,7 @@ func move(delta: float) -> void:
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
-	move(delta)
+	super(delta)
 
 func _on_timer_timeout() -> void:
 	timer.wait_time = 2.0

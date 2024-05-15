@@ -1,15 +1,12 @@
 extends Fish 
 
+func _ready():
+	speed = 2000
+	point_value = 5
+	velocity_limit = 200
+
 func move(delta: float) -> void:
-	if is_being_attacked:
-		speed = 2000
-		change_sprite_direction()
-		velocity += direction * speed * delta
-	else:
-		speed = 1000
-		change_sprite_direction()
-		velocity += direction * speed * delta
-	move_and_slide()
+	super(delta)
 	velocity = direction * 0
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.

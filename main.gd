@@ -11,6 +11,7 @@ var world: Node2D
 var world_camera: Camera2D
 var player: CharacterBody2D
 var is_surfaced: bool = true
+var display_dive_points: Label
 
 var total_points: int
 var dive_points: int
@@ -78,3 +79,7 @@ func _on_surface_body_exited(body: Node2D) -> void:
 func _on_captured_fish(fish: Fish) -> void:
 	fish.queue_free()
 	dive_points += fish.point_value
+	display_dive_points = world.get_node("Camera2D/CanvasLayer/Score") as Label
+	display_dive_points.set_text("Points: " + str(dive_points))
+	
+	

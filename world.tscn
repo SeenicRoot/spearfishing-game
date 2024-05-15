@@ -1,8 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://dinwsk6yoe6t3"]
+[gd_scene load_steps=8 format=3 uid="uid://dinwsk6yoe6t3"]
 
 [ext_resource type="TileSet" uid="uid://c6l48pd00c62j" path="res://tilemap/water_tileset.tres" id="1_855xw"]
 [ext_resource type="Script" path="res://Ocean.gd" id="2_i2g8e"]
 [ext_resource type="PackedScene" uid="uid://biip1hld5vpp0" path="res://fish/fish.tscn" id="3_jf4a3"]
+[ext_resource type="PackedScene" uid="uid://wwmhd6oa8opb" path="res://fish/squid.tscn" id="4_brv5i"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_igpnl"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_m8jfr"]
 normal = Vector2(0, 1)
@@ -35,6 +38,19 @@ layer_0/tile_data = PackedInt32Array(-655380, 65536, 1, -589844, 65536, 1, -5243
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
 
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
+
+[node name="Score" type="Label" parent="Camera2D/CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -67.0
+offset_bottom = 23.0
+grow_horizontal = 0
+text = "Points: 0"
+label_settings = SubResource("LabelSettings_igpnl")
+horizontal_alignment = 2
+
 [node name="SurfaceBreakpoint" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SurfaceBreakpoint"]
@@ -50,3 +66,6 @@ shape = SubResource("WorldBoundaryShape2D_mtwbk")
 
 [node name="fish" parent="Node2D" instance=ExtResource("3_jf4a3")]
 position = Vector2(-2, 178)
+
+[node name="squid" parent="Node2D" instance=ExtResource("4_brv5i")]
+position = Vector2(88, 128)

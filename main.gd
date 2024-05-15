@@ -76,5 +76,5 @@ func _on_surface_body_exited(body: Node2D) -> void:
 		is_surfaced = false
 
 func _on_captured_fish(fish: Fish) -> void:
+	fish.queue_free()
 	dive_points += fish.point_value
-	

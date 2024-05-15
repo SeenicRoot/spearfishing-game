@@ -27,7 +27,7 @@ var shooting: bool = false
 var reeling_harpoon: bool = false
 var harpoon_velocity: float = 0
 var harpoon_direction: Vector2 = Vector2.ZERO
-var hooked_fish: Array[Fish] = []
+var hooked_fishes: Array[Fish] = []
 
 @onready var loaded_sprite: Sprite2D = $LoadedSprite
 @onready var unloaded_sprite: Sprite2D = $UnloadedSprite
@@ -79,14 +79,15 @@ func reel_harpoon(delta: float) -> void:
 		harpoon.visible = false
 		shooting = false
 		harpoon_velocity = 0
-		for fish in hooked_fish:
+		for fish in hooked_fishes:
 			captured_fish.emit(fish)
+			hooked_fishes = []
 
 
 func _on_harpoon_body_entered(body: Node2D) -> void:
-	if reeling_harpoon:
+	if reeling_harpoon: # do not catch fish if harpoon is returning
 		return
-	if body is Fish:
-		hooked_fish.append(body)
-		body.process_mode = Node.PROCESS_MODE_DISABLED
+	if body is Fish and body.process_mode != PROCESS_MODE_DISABLED:
+		body.process_mode = PROCESS_MODE_DISABLED
 		body.reparent(harpoon)
+		hooked_fishes.append(body)

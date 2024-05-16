@@ -2,7 +2,7 @@ class_name HarpoonLauncher
 extends Node2D
 
 signal launched(harpoon: Area2D)
-signal captured_fish(fish: Fish)
+signal captured_fish(fishes: Array[Fish])
 
 const DECELERATION = 10.0
 
@@ -23,7 +23,7 @@ var flip_v: bool = false:
 		harpoon_reset_position.y = -harpoon.position.y
 		flip_v = val
 
-var shooting: bool = false
+var loaded: bool = true
 var reeling_harpoon: bool = false
 var harpoon_velocity: float = 0
 var harpoon_direction: Vector2 = Vector2.ZERO
@@ -35,19 +35,19 @@ var hooked_fishes: Array[Fish] = []
 
 
 func _physics_process(delta: float) -> void:
-	if shooting:
+	if not loaded and not reeling_harpoon:
 		move_harpoon(delta)
-	if reeling_harpoon:
+	elif not loaded and reeling_harpoon:
 		reel_harpoon(delta)
 
 
 func shoot() -> void:
-	if shooting:
+	if not loaded:
 		return
 	unloaded_sprite.visible = true
 	loaded_sprite.visible = false
 	harpoon.visible = true
-	shooting = true
+	loaded = false
 	harpoon_velocity = harpoon_speed
 	harpoon.global_rotation = global_rotation
 	harpoon.global_position = global_position + harpoon_reset_position
@@ -77,11 +77,10 @@ func reel_harpoon(delta: float) -> void:
 		unloaded_sprite.visible = false
 		loaded_sprite.visible = true
 		harpoon.visible = false
-		shooting = false
+		loaded = true
 		harpoon_velocity = 0
-		for fish in hooked_fishes:
-			captured_fish.emit(fish)
-			hooked_fishes = []
+		captured_fish.emit(hooked_fishes)
+		hooked_fishes = []
 
 
 func _on_harpoon_body_entered(body: Node2D) -> void:

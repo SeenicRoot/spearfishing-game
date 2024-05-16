@@ -7,10 +7,10 @@
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_m8jfr"]
 normal = Vector2(0, 1)
-distance = 50.0
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_mtwbk"]
 normal = Vector2(0, 1)
+distance = -4.0
 
 [node name="World" type="Node2D"]
 
@@ -37,12 +37,12 @@ layer_0/tile_data = PackedInt32Array(-655380, 65536, 1, -589844, 65536, 1, -5243
 position_smoothing_enabled = true
 
 [node name="SurfaceBreakpoint" type="Area2D" parent="."]
+position = Vector2(0, 50)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SurfaceBreakpoint"]
 shape = SubResource("WorldBoundaryShape2D_m8jfr")
 
 [node name="SurfaceBarrier" type="StaticBody2D" parent="."]
-position = Vector2(0, -4)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SurfaceBarrier"]
 shape = SubResource("WorldBoundaryShape2D_mtwbk")

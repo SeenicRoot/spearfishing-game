@@ -1,11 +1,12 @@
 extends Node
 
 const CAMERA_SURFACE_OFFSET_Y = -75
+const SURFACE_THRESHOLD = 5
 
 @export var music: AudioStream
 
 var game_running: bool = false
-var is_surfaced: bool = true
+var show_surface: bool = true
 var max_depth: float = 0
 
 var total_points: int
@@ -17,8 +18,9 @@ var dive_points: int:
 @onready var game_ui: Control = %GameUI
 @onready var world: Node2D = %World
 @onready var world_camera: Camera2D = %World/Camera2D
-@onready var player: CharacterBody2D = %World/Player
+@onready var player: Player = %World/Player
 @onready var depth_meter: ProgressBar = %GameUI/%DepthMeter
+@onready var breath_meter: ProgressBar = %GameUI/%BreathMeter
 @onready var dive_points_display: Label = %GameUI/Score
 
 
@@ -33,12 +35,8 @@ func _process(_delta: float) -> void:
 		update_player_depth()
 
 
-func show_surface() -> void:
-	is_surfaced = true
-
-
 func follow_camera_to_player() -> void:
-	if not is_surfaced:
+	if not show_surface:
 		world_camera.global_position = player.global_position
 	else:
 		world_camera.global_position.x = player.global_position.x
@@ -50,7 +48,11 @@ func start_game() -> void:
 	surface_breakpoint.body_entered.connect(_on_surface_body_entered)
 	surface_breakpoint.body_exited.connect(_on_surface_body_exited)
 	
-	player.harpoon_launcher.captured_fish.connect(_on_captured_fish)
+	player.breath_changed.connect(func (val: float) -> void: breath_meter.value = val)
+	breath_meter.value = player.breath
+	player.max_breath_changed.connect(func (val: float) -> void: breath_meter.max_value = val)
+	breath_meter.max_value = player.max_breath
+	player.fishes_changed.connect(_on_fishes_changed)
 	
 	game_ui.visible = true
 	game_running = true
@@ -67,7 +69,7 @@ func start_music() -> void:
 func update_player_depth() -> void:
 	if player.position.y > max_depth:
 		max_depth = player.position.y
-		
+
 	const GUI_MIN_DEPTH = 960
 	if player.position.y > GUI_MIN_DEPTH:
 		if not depth_meter.visible:
@@ -88,19 +90,20 @@ func update_player_depth() -> void:
 
 
 func _on_surface_body_entered(body: Node2D) -> void:
-	if body.name == "Player":
-		is_surfaced = true
+	if body is Player:
+		player.is_surfaced = true
+		show_surface = true
 		total_points += dive_points
 		dive_points = 0
-
+		max_depth = 0
 	else:
 		body.queue_free()
 
 
 func _on_surface_body_exited(body: Node2D) -> void:
 	if body.name == "Player":
-		is_surfaced = false
+		player.is_surfaced = false
+		show_surface = false
 
-func _on_captured_fish(fish: Fish) -> void:
-	fish.queue_free()
-	dive_points += fish.point_value
+func _on_fishes_changed(captured_fishes: Array[Dictionary]) -> void:
+	dive_points = captured_fishes.reduce(func (accum, fish): return accum + fish.value, 0)

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Shop" load_steps=6 format=3 uid="uid://6akxx5b1sfix"]
+
+[ext_resource type="Script" path="res://system/shop/shop.gd" id="1_7krb3"]
+[ext_resource type="Resource" uid="uid://cmsp3wr0mshu4" path="res://system/shop/items/harpoon_enhancement.tres" id="1_px5u3"]
+[ext_resource type="Resource" uid="uid://c8ueg4kerapjd" path="res://system/shop/items/oxygen_capacity.tres" id="2_a6r12"]
+[ext_resource type="Resource" uid="uid://bgg4p846j2010" path="res://system/shop/items/inflation.tres" id="3_eio7y"]
+[ext_resource type="Resource" uid="uid://cf867dh8066rd" path="res://system/shop/items/treasure_hunter.tres" id="4_mkcmx"]
+
+[resource]
+script = ExtResource("1_7krb3")
+items = Array[null]([ExtResource("1_px5u3"), ExtResource("2_a6r12"), ExtResource("3_eio7y"), ExtResource("4_mkcmx"), null, null, null, null, null, null, null, null, null, null, null, null])

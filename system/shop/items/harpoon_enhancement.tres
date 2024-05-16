@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Augment" load_steps=4 format=3 uid="uid://cmsp3wr0mshu4"]
+
+[ext_resource type="Script" path="res://system/shop/augment_item.gd" id="1_5uqtt"]
+[ext_resource type="Texture2D" uid="uid://ddl464tueycrq" path="res://assets/SpearFishing Assets Pack/Sprites/Harpoon.png" id="2_b45f3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gjc3v"]
+atlas = ExtResource("2_b45f3")
+region = Rect2(0, 20.0547, 32, 11.9453)
+
+[resource]
+script = ExtResource("1_5uqtt")
+level = 1
+dict_level_description = {
+1: "Increase hitbox",
+2: "Increase shooting range",
+3: "Shoots 2 harpoon at a time"
+}
+name = "UpgradeHarpoon"
+texture = SubResource("AtlasTexture_gjc3v")
+description = ""
+cost = 100

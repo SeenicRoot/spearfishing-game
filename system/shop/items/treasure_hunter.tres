@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="Augment" load_steps=4 format=3 uid="uid://cf867dh8066rd"]
+
+[ext_resource type="Script" path="res://system/shop/augment_item.gd" id="1_layqe"]
+[ext_resource type="Texture2D" uid="uid://dvjss50xxxniv" path="res://assets/Animated Chests/Animated Chests/Chests.png" id="2_jmlyg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_plqnn"]
+atlas = ExtResource("2_jmlyg")
+region = Rect2(0, 133.091, 32.5042, 32.2314)
+
+[resource]
+script = ExtResource("1_layqe")
+level = 1
+dict_level_description = {
+1: "can now find rare fish (double points/catch)",
+2: "can now find hidden augment",
+3: "can now bring back treasure boxes"
+}
+name = "TreasureHunter"
+texture = SubResource("AtlasTexture_plqnn")
+description = "Placeholder"
+cost = 100

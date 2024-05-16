@@ -9,13 +9,17 @@ var is_surfaced: bool = true
 var max_depth: float = 0
 
 var total_points: int
-var dive_points: int
+var dive_points: int:
+	set(val):
+		dive_points = val
+		dive_points_display.text = "Points: " + str(dive_points)
 
 @onready var game_ui: Control = %GameUI
 @onready var world: Node2D = %World
 @onready var world_camera: Camera2D = %World/Camera2D
 @onready var player: CharacterBody2D = %World/Player
 @onready var depth_meter: ProgressBar = %GameUI/%DepthMeter
+@onready var dive_points_display: Label = %GameUI/Score
 
 
 func _ready() -> void:

@@ -7,13 +7,15 @@ const SURFACE_THRESHOLD = 5
 
 var game_running: bool = false
 var show_surface: bool = true
-var max_depth: float = 0
+var max_depth: float = 0.0
 
 var total_points: int
 var dive_points: int:
 	set(val):
 		dive_points = val
 		dive_points_display.text = "Points: " + str(dive_points)
+var camera_follow_player: bool = true
+var camera_offset_y: float = 0.0
 
 @onready var game_ui: Control = %GameUI
 @onready var world: Node2D = %World
@@ -36,12 +38,19 @@ func _process(_delta: float) -> void:
 
 
 func follow_camera_to_player() -> void:
-	if not show_surface:
-		world_camera.global_position = player.global_position
+	world_camera.global_position.x = player.global_position.x
+	if not player.is_surfaced:
+		world_camera.global_position.y = player.global_position.y + camera_offset_y
+	
+func change_camera_view() -> void:
+	if player.is_surfaced:
+		var tween := create_tween()
+		tween.tween_property(world_camera, "position:y", CAMERA_SURFACE_OFFSET_Y, 1)
 	else:
-		world_camera.global_position.x = player.global_position.x
-		world_camera.global_position.y = CAMERA_SURFACE_OFFSET_Y
-
+		var y_distance := world_camera.global_position.y - player.global_position.y
+		var tween := create_tween()
+		tween.tween_property(self, "camera_offset_y", 0.0, 1).from(y_distance)
+		
 
 func start_game() -> void:
 	var surface_breakpoint := world.get_node("SurfaceBreakpoint") as Area2D
@@ -75,11 +84,11 @@ func update_player_depth() -> void:
 		if not depth_meter.visible:
 			depth_meter.modulate.a = 0
 			depth_meter.visible = true
-			var tween := get_tree().create_tween()
+			var tween := create_tween()
 			tween.tween_property(depth_meter, "modulate:a", 1, 2)
 	else:
 		if depth_meter.visible:
-			var tween := get_tree().create_tween()
+			var tween := create_tween()
 			tween.tween_property(depth_meter, "modulate:a", 0, 2)
 			await tween.finished
 			depth_meter.visible = false
@@ -96,6 +105,8 @@ func _on_surface_body_entered(body: Node2D) -> void:
 		total_points += dive_points
 		dive_points = 0
 		max_depth = 0
+		change_camera_view()
+		player.captured_fishes = []
 	else:
 		body.queue_free()
 
@@ -104,6 +115,7 @@ func _on_surface_body_exited(body: Node2D) -> void:
 	if body.name == "Player":
 		player.is_surfaced = false
 		show_surface = false
+		change_camera_view()
 
 func _on_fishes_changed(captured_fishes: Array[Dictionary]) -> void:
 	dive_points = captured_fishes.reduce(func (accum, fish): return accum + fish.value, 0)

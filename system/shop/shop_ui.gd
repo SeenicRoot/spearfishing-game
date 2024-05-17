@@ -1,26 +1,25 @@
 extends Control
 
 @export var total_points: Label
+@export var title: Label
+@export var level: Label
+
+@export var item_description: RichTextLabel
+@export var charges = Label
+@export var cost = Label
+@export var buy = Button
 
 var selected_item: ShopItem
 
 @onready var shop: Shop = preload("res://system/shop/shop.tres")
 @onready var items: Array = $LeftContainer/GridContainer.get_children()
-@onready var detail = $RightContainer
-@onready var title = $RightContainer/VBoxContainer/Title
-@onready var level = $RightContainer/VBoxContainer/Level
 @onready var item_visual: TextureRect = $RightContainer/VBoxContainer/ShopItem/MarginContainer/ItemDisplay
-@onready var item_description: = $RightContainer/VBoxContainer/MarginContainer/Description
-@onready var charges = $RightContainer/VBoxContainer/Charges
-@onready var cost = $RightContainer/VBoxContainer/Cost
-@onready var buy = $RightContainer/VBoxContainer/Buy
 
-var my_points: int = 300
+var my_points: int = 1000
 
 func _ready():
 	connect_shop_items()
 	update()
-	detail.visible = false
 	buy.pressed.connect(buy_selected_item)
 	select_item(items[0].item_ref)
 
@@ -44,7 +43,6 @@ func select_item(item: ShopItem):
 	else: 
 		buy.modulate = "ffffff"
 		buy.disabled = false
-	detail.visible = true
 	item_visual.texture = selected_item.texture
 	if selected_item is Augment:
 		level.visible = true

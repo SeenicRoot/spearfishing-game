@@ -9,9 +9,9 @@ region = Rect2(0, 20.0547, 32, 11.9453)
 
 [resource]
 script = ExtResource("1_acttd")
-level = 1
 description_per_level = Array[String](["Increase the hitbox of your harpoon casting line", "Increase shooting range of your harpoon casting line", "Increase the shooting speed of your harpoon projectile"])
 cost_per_level = Array[int]([100, 300, 1000])
+level = 1
 name = "HarpoonMastery"
 texture = SubResource("AtlasTexture_gjc3v")
 description = ""

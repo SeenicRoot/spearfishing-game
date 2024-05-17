@@ -9,9 +9,9 @@ region = Rect2(0, 0, 16.3989, 16)
 
 [resource]
 script = ExtResource("1_5ej0i")
-level = 1
 description_per_level = Array[String](["Increase the fish value by 10%", "Increase the fish value by 25%", "Increase the fish value by 50%"])
 cost_per_level = Array[int]([300, 1000, 2000])
+level = 1
 name = "Inflation"
 texture = SubResource("AtlasTexture_jif1u")
 description = ""

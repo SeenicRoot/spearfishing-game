@@ -11,9 +11,9 @@ region = Rect2(0, 133.091, 32.5042, 32.2314)
 script = ExtResource("1_layqe")
 level = 1
 dict_level_description = {
-1: "can now find rare fish (double points/catch)",
-2: "can now find hidden augment",
-3: "can now bring back treasure boxes"
+1: "The player can now fin rare fishes that have double the points value of normal ones",
+2: "The player can now find consummable item during their dive",
+3: "The player can now bring back 1 treasure box in each dive"
 }
 name = "TreasureHunter"
 texture = SubResource("AtlasTexture_plqnn")

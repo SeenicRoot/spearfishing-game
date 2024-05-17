@@ -5,6 +5,7 @@ extends Control
 @onready var detail = $RightContainer
 @onready var total_points = $RightContainer/VBoxContainer/TotalPoints
 @onready var selected_item = $RightContainer/VBoxContainer/ShopItem 
+@onready var title = $RightContainer/VBoxContainer/Title
 @onready var level = $RightContainer/VBoxContainer/Level
 @onready var item_visual: TextureRect = $RightContainer/VBoxContainer/ShopItem/MarginContainer/ItemDisplay
 @onready var item_description: = $RightContainer/VBoxContainer/MarginContainer/Description
@@ -34,7 +35,8 @@ func update():
 func select_item(item: ShopItem):
 	total_points.text = str(my_points)
 	selected_item = item
-	if my_points < selected_item.cost:
+	title.text = selected_item._get_name()
+	if my_points < selected_item._get_cost():
 		buy.modulate = "000000"
 		buy.disabled = true
 	else: 
@@ -45,22 +47,26 @@ func select_item(item: ShopItem):
 	if selected_item is Augment:
 		level.visible = true
 		charges.visible = false
-		level.text = "Lvl " + str(selected_item.level)
-		if selected_item.level == 3: #max level
+		selected_item._set_description(selected_item.update_description(selected_item.dict_level_description.get(selected_item.level)))
+		level.text = "Lvl " + str(selected_item._get_level())
+		if selected_item._get_level() == 3: ## Max level
 			buy.text = "Max level reached"
 			buy.disabled = true
 		else:
 			buy.text = "Buy"
-		item_description.text = selected_item.update_description(selected_item.dict_level_description.get(selected_item.level))
-	else: ## consummable
+	else: ## Consummable
 		level.visible = false
 		charges.visible = true
-	cost.text = "$" + str(selected_item.cost)
+		charges.text = "Charges: " + str(selected_item._get_charges())
+	item_description.text = selected_item._get_description()
+	cost.text = "$" + str(selected_item._get_cost())
 	
 func buy_selected_item():
-	if selected_item is Augment:
-		selected_item.level += 1
-	else: 
-		selected_item.charges += 1
 	my_points -= selected_item.cost
+	if selected_item is Augment:
+		selected_item._set_level(selected_item.update_level(selected_item._get_level()))
+		selected_item._set_description(selected_item.update_description(selected_item.dict_level_description.get(selected_item.level)))
+		selected_item._set_cost(selected_item.update_cost(selected_item.level))
+	else: 
+		selected_item._set_charges(selected_item.update_charges(selected_item._get_charges()))
 	select_item(selected_item)

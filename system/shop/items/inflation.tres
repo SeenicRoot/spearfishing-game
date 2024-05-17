@@ -11,9 +11,9 @@ region = Rect2(0, 0, 16.3989, 16)
 script = ExtResource("1_5ej0i")
 level = 1
 dict_level_description = {
-1: "fish value x 1.1",
-2: "fish value x 1.25",
-3: "fish value x 1.5"
+1: "Increase the fish value by 10%",
+2: "Increase the fish value by 25%",
+3: "Increase the fish value by 50%"
 }
 name = "Inflation"
 texture = SubResource("AtlasTexture_jif1u")

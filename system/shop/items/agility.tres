@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Augment" load_steps=3 format=3 uid="uid://qgfcb8j650s2"]
+
+[ext_resource type="Script" path="res://system/shop/augment_item.gd" id="1_1rome"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_vu08u"]
+
+[resource]
+script = ExtResource("1_1rome")
+level = 1
+dict_level_description = {
+1: "Increase swim speed by 25%",
+2: "Increase swim speed by 50%",
+3: "Increase swim speed by 100%"
+}
+name = "Agility"
+texture = SubResource("PlaceholderTexture2D_vu08u")
+description = ""
+cost = 100

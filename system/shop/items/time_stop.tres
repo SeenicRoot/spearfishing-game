@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Consumable" load_steps=3 format=3 uid="uid://clsin42v1mls8"]
+
+[ext_resource type="Script" path="res://system/shop/consumable_item.gd" id="1_ele5x"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_kcsrg"]
+
+[resource]
+script = ExtResource("1_ele5x")
+charges = 0
+name = "TimeStop"
+texture = SubResource("PlaceholderTexture2D_kcsrg")
+description = "On use: Stop all fish from moving for a short period of time"
+cost = 100

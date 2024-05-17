@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Augment" load_steps=3 format=3 uid="uid://h33l1kpcq2kg"]
+
+[ext_resource type="Script" path="res://system/shop/augment_item.gd" id="1_oqvmw"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_vu08u"]
+
+[resource]
+script = ExtResource("1_oqvmw")
+description_per_level = Array[String](["Allows player to take a submarine and submerge your character all the way to 100 meters in depth", "Allows player to take a submarine and submerge your character all the way to 200 meters in depth", "Allows player to take a submarine and submerge your character all the way to 300 meters in depth"])
+cost_per_level = Array[int]([500, 1000, 2000])
+level = 1
+name = "DivingExpress"
+texture = SubResource("PlaceholderTexture2D_vu08u")
+description = ""
+cost = 100

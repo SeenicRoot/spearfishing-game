@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Augment" load_steps=3 format=3 uid="uid://bytjuqqksmeuu"]
+
+[ext_resource type="Script" path="res://system/shop/augment_item.gd" id="1_j0eeq"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_vu08u"]
+
+[resource]
+script = ExtResource("1_j0eeq")
+description_per_level = Array[String](["Allows player to absorb nearby fishes", "Increase the radius of the magnet moderately", "Increase the radius of the magnet significantly"])
+cost_per_level = Array[int]([500, 1000, 2000])
+level = 1
+name = "Magnetism"
+texture = SubResource("PlaceholderTexture2D_vu08u")
+description = ""
+cost = 100

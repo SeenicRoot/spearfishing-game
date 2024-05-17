@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Augment" load_steps=4 format=3 uid="uid://c8ueg4kerapjd"]
+
+[ext_resource type="Script" path="res://system/shop/augment_item.gd" id="1_m8sde"]
+[ext_resource type="Texture2D" uid="uid://bukvp8f1rf17" path="res://assets/SpearFishing Assets Pack/Sprites/Bubble - 8x8.png" id="2_rrptv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mtje5"]
+atlas = ExtResource("2_rrptv")
+region = Rect2(31.4847, 0, 8.78349, 8)
+
+[resource]
+script = ExtResource("1_m8sde")
+description_per_level = Array[String](["increase the oxygen level by a small amount", "increase the oxygen level by a moderate amount", "increase the oxygen level by a large amount"])
+cost_per_level = Array[int]([100, 500, 2000])
+level = 1
+name = "IncreaseOxygenTankCapacity"
+texture = SubResource("AtlasTexture_mtje5")
+description = ""
+cost = 100

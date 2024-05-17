@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Augment" load_steps=4 format=3 uid="uid://bgg4p846j2010"]
+
+[ext_resource type="Script" path="res://system/shop/augment_item.gd" id="1_5ej0i"]
+[ext_resource type="Texture2D" uid="uid://2bltl05rcbi3" path="res://assets/SpearFishing Assets Pack/Sprites/Coin Big - 16x16.png" id="2_riuhh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jif1u"]
+atlas = ExtResource("2_riuhh")
+region = Rect2(0, 0, 16.3989, 16)
+
+[resource]
+script = ExtResource("1_5ej0i")
+description_per_level = Array[String](["Increase the fish value by 10%", "Increase the fish value by 25%", "Increase the fish value by 50%"])
+cost_per_level = Array[int]([300, 1000, 2000])
+level = 1
+name = "Inflation"
+texture = SubResource("AtlasTexture_jif1u")
+description = ""
+cost = 100

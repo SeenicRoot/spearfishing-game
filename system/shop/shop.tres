@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Shop" load_steps=14 format=3 uid="uid://6akxx5b1sfix"]
+
+[ext_resource type="Resource" uid="uid://b4gxwu68i1pia" path="res://system/shop/items/agility.tres" id="1_8svdk"]
+[ext_resource type="Resource" uid="uid://cm5yxw5b84dv8" path="res://system/shop/items/camouflage.tres" id="2_plenv"]
+[ext_resource type="Resource" uid="uid://5hb2rwphoxm0" path="res://system/shop/items/daily_double.tres" id="3_kmnt1"]
+[ext_resource type="Resource" uid="uid://h33l1kpcq2kg" path="res://system/shop/items/diving_express.tres" id="4_fcmin"]
+[ext_resource type="Resource" uid="uid://cjak2nnqd8g6m" path="res://system/shop/items/emergency_recall.tres" id="5_x1ag7"]
+[ext_resource type="Resource" uid="uid://bkda5wtfhkc8y" path="res://system/shop/items/harpoon_enhancement.tres" id="6_get1e"]
+[ext_resource type="Resource" uid="uid://cmsp3wr0mshu4" path="res://system/shop/items/harpoon_mastery.tres" id="7_41hkc"]
+[ext_resource type="Resource" uid="uid://bgg4p846j2010" path="res://system/shop/items/inflation.tres" id="8_s5imw"]
+[ext_resource type="Resource" uid="uid://bytjuqqksmeuu" path="res://system/shop/items/magnetism.tres" id="9_88ipu"]
+[ext_resource type="Resource" uid="uid://c8ueg4kerapjd" path="res://system/shop/items/oxygen_capacity.tres" id="10_ofy7k"]
+[ext_resource type="Resource" uid="uid://clsin42v1mls8" path="res://system/shop/items/time_stop.tres" id="11_qjiiv"]
+[ext_resource type="Resource" uid="uid://cf867dh8066rd" path="res://system/shop/items/treasure_hunter.tres" id="12_tctrt"]
+[ext_resource type="Script" path="res://system/shop/shop.gd" id="13_4aks2"]
+
+[resource]
+script = ExtResource("13_4aks2")
+items = Array[Resource("res://system/shop/shop_item.gd")]([ExtResource("1_8svdk"), ExtResource("2_plenv"), ExtResource("3_kmnt1"), ExtResource("4_fcmin"), ExtResource("5_x1ag7"), ExtResource("6_get1e"), ExtResource("7_41hkc"), ExtResource("8_s5imw"), ExtResource("9_88ipu"), ExtResource("10_ofy7k"), ExtResource("11_qjiiv"), ExtResource("12_tctrt")])

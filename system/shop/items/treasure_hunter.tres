@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Augment" load_steps=4 format=3 uid="uid://cf867dh8066rd"]
+
+[ext_resource type="Script" path="res://system/shop/augment_item.gd" id="1_layqe"]
+[ext_resource type="Texture2D" uid="uid://dvjss50xxxniv" path="res://assets/Animated Chests/Animated Chests/Chests.png" id="2_jmlyg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_plqnn"]
+atlas = ExtResource("2_jmlyg")
+region = Rect2(0, 133.091, 32.5042, 32.2314)
+
+[resource]
+script = ExtResource("1_layqe")
+description_per_level = Array[String](["The player can now fin rare fishes that have double the points value of normal ones", "The player can now find consummable item during their dive", "The player can now bring back 1 treasure box in each dive"])
+cost_per_level = Array[int]([300, 1000, 2000])
+level = 1
+name = "TreasureHunter"
+texture = SubResource("AtlasTexture_plqnn")
+description = "Placeholder"
+cost = 100

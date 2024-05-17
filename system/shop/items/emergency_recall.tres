@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Consumable" load_steps=3 format=3 uid="uid://cjak2nnqd8g6m"]
+
+[ext_resource type="Script" path="res://system/shop/consumable_item.gd" id="1_hvs21"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_kcsrg"]
+
+[resource]
+script = ExtResource("1_hvs21")
+charges = 0
+name = "EmergencyRecall"
+texture = SubResource("PlaceholderTexture2D_kcsrg")
+description = "On use: Bring back the player to the surface immediately"
+cost = 100

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Consumable" load_steps=3 format=3 uid="uid://cm5yxw5b84dv8"]
+
+[ext_resource type="Script" path="res://system/shop/consumable_item.gd" id="1_weg4j"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_kcsrg"]
+
+[resource]
+script = ExtResource("1_weg4j")
+charges = 0
+name = "Camouflage"
+texture = SubResource("PlaceholderTexture2D_kcsrg")
+description = "On use: Turns the player invisible for a short period of time"
+cost = 100

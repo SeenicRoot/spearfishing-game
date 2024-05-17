@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Consumable" load_steps=3 format=3 uid="uid://5hb2rwphoxm0"]
+
+[ext_resource type="Script" path="res://system/shop/consumable_item.gd" id="1_sbjcd"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_kcsrg"]
+
+[resource]
+script = ExtResource("1_sbjcd")
+charges = 0
+name = "DailyDouble"
+texture = SubResource("PlaceholderTexture2D_kcsrg")
+description = "On use before diving: Double the points value of a random fish for the current dive"
+cost = 100

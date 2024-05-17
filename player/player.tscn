@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bpumku3jmxiy2"]
+[gd_scene load_steps=9 format=3 uid="uid://bpumku3jmxiy2"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_yibih"]
 [ext_resource type="Texture2D" uid="uid://bvng2rxvvfyvc" path="res://assets/SpearFishing Assets Pack/Sprites/Diver-32x32/Diver 5.png" id="2_pblo8"]
@@ -18,6 +18,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [15]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_in2y5"]
 resource_name = "swim"
@@ -36,9 +48,39 @@ tracks/0/keys = {
 "values": [15, 16, 17, 18]
 }
 
+[sub_resource type="Animation" id="Animation_u86q0"]
+resource_name = "panic"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [15, 16, 17, 18, 15, 16, 17, 18]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(2, 2),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0.337914, 0.246775, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5oiao"]
 _data = {
 "RESET": SubResource("Animation_vmio7"),
+"panic": SubResource("Animation_u86q0"),
 "swim": SubResource("Animation_in2y5")
 }
 
@@ -49,7 +91,7 @@ radius = 6.0
 z_index = 3
 script = ExtResource("1_yibih")
 acceleration = 125.0
-max_velocity = 100.0
+max_breath = 10.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -68,3 +110,8 @@ shape = SubResource("CircleShape2D_p2o5f")
 [node name="HarpoonLauncher" parent="." instance=ExtResource("3_ubeoq")]
 z_index = -1
 position = Vector2(8, -1)
+
+[node name="FishInventory" type="Node2D" parent="."]
+
+[node name="PanicTimer" type="Timer" parent="."]
+wait_time = 0.5

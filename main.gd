@@ -1,24 +1,32 @@
 extends Node
 
 const CAMERA_SURFACE_OFFSET_Y = -75
+const SURFACE_THRESHOLD = 5
 
-@export var world_scene: PackedScene
-@export var player_scene: PackedScene
 @export var music: AudioStream
 
 var game_running: bool = false
-var world: Node2D
-var world_camera: Camera2D
-var player: CharacterBody2D
-var is_surfaced: bool = true
-var display_dive_points: Label
+var show_surface: bool = true
+var max_depth: float = 0.0
 
 var total_points: int
-var dive_points: int
+var dive_points: int:
+	set(val):
+		dive_points = val
+		dive_points_display.text = "Points: " + str(dive_points)
+var camera_follow_player: bool = true
+var camera_offset_y: float = 0.0
+
+@onready var game_ui: Control = %GameUI
+@onready var world: Node2D = %World
+@onready var world_camera: Camera2D = %World/Camera2D
+@onready var player: Player = %World/Player
+@onready var depth_meter: ProgressBar = %GameUI/%DepthMeter
+@onready var breath_meter: ProgressBar = %GameUI/%BreathMeter
+@onready var dive_points_display: Label = %GameUI/Score
+
 
 func _ready() -> void:
-	for child in get_children():
-		queue_free()
 	start_game()
 	start_music()
 
@@ -26,32 +34,36 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if game_running:
 		follow_camera_to_player()
-
-
-func show_surface() -> void:
-	is_surfaced = true
+		update_player_depth()
 
 
 func follow_camera_to_player() -> void:
-	if not is_surfaced:
-		world_camera.global_position = player.global_position
+	world_camera.global_position.x = player.global_position.x
+	if not player.is_surfaced:
+		world_camera.global_position.y = player.global_position.y + camera_offset_y
+	
+func change_camera_view() -> void:
+	if player.is_surfaced:
+		var tween := create_tween()
+		tween.tween_property(world_camera, "position:y", CAMERA_SURFACE_OFFSET_Y, 1)
 	else:
-		world_camera.global_position.x = player.global_position.x
-		world_camera.global_position.y = CAMERA_SURFACE_OFFSET_Y
-
+		var y_distance := world_camera.global_position.y - player.global_position.y
+		var tween := create_tween()
+		tween.tween_property(self, "camera_offset_y", 0.0, 1).from(y_distance)
+		
 
 func start_game() -> void:
-	world = world_scene.instantiate()
-	world_camera = world.get_node("Camera2D") as Camera2D
 	var surface_breakpoint := world.get_node("SurfaceBreakpoint") as Area2D
 	surface_breakpoint.body_entered.connect(_on_surface_body_entered)
 	surface_breakpoint.body_exited.connect(_on_surface_body_exited)
-	add_child(world)
 	
-	player = player_scene.instantiate() as CharacterBody2D
-	world.add_child(player)
-	player.harpoon_launcher.captured_fish.connect(_on_captured_fish)
+	player.breath_changed.connect(func (val: float) -> void: breath_meter.value = val)
+	breath_meter.value = player.breath
+	player.max_breath_changed.connect(func (val: float) -> void: breath_meter.max_value = val)
+	breath_meter.max_value = player.max_breath
+	player.fishes_changed.connect(_on_fishes_changed)
 	
+	game_ui.visible = true
 	game_running = true
 	
 	
@@ -62,24 +74,48 @@ func start_music() -> void:
 	music_player.volume_db = -20
 	add_child(music_player)
 
+
+func update_player_depth() -> void:
+	if player.position.y > max_depth:
+		max_depth = player.position.y
+
+	const GUI_MIN_DEPTH = 960
+	if player.position.y > GUI_MIN_DEPTH:
+		if not depth_meter.visible:
+			depth_meter.modulate.a = 0
+			depth_meter.visible = true
+			var tween := create_tween()
+			tween.tween_property(depth_meter, "modulate:a", 1, 2)
+	else:
+		if depth_meter.visible:
+			var tween := create_tween()
+			tween.tween_property(depth_meter, "modulate:a", 0, 2)
+			await tween.finished
+			depth_meter.visible = false
+	
+	
+	depth_meter.value = player.position.y
+	depth_meter.max_value = max_depth
+
+
 func _on_surface_body_entered(body: Node2D) -> void:
-	if body.name == "Player":
-		is_surfaced = true
+	if body is Player:
+		player.is_surfaced = true
+		show_surface = true
 		total_points += dive_points
 		dive_points = 0
-
+		max_depth = 0
+		change_camera_view()
+		player.captured_fishes = []
 	else:
 		body.queue_free()
 
 
 func _on_surface_body_exited(body: Node2D) -> void:
 	if body.name == "Player":
-		is_surfaced = false
+		player.is_surfaced = false
+		show_surface = false
+		change_camera_view()
 
-func _on_captured_fish(fish: Fish) -> void:
-	fish.queue_free()
-	dive_points += fish.point_value
-	display_dive_points = world.get_node("Camera2D/CanvasLayer/Score") as Label
-	display_dive_points.set_text("Points: " + str(dive_points))
-	
-	
+func _on_fishes_changed(captured_fishes: Array[Dictionary]) -> void:
+	dive_points = captured_fishes.reduce(func (accum, fish): return accum + fish.value, 0)

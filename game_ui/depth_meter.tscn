@@ -1,0 +1,120 @@
+[gd_scene load_steps=5 format=3 uid="uid://8ni02sje7pwo"]
+
+[ext_resource type="Script" path="res://game_ui/depth_meter.gd" id="1_23gum"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f1brd"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lu2ut"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_5i8nk"]
+font_size = 8
+
+[node name="DepthMeter" type="ProgressBar"]
+anchors_preset = -1
+anchor_left = 0.435937
+anchor_top = 0.213889
+anchor_right = 0.532812
+anchor_bottom = 0.783333
+mouse_filter = 1
+theme_override_styles/background = SubResource("StyleBoxEmpty_f1brd")
+theme_override_styles/fill = SubResource("StyleBoxEmpty_lu2ut")
+fill_mode = 2
+show_percentage = false
+script = ExtResource("1_23gum")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="Meter" type="Control" parent="MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="TopBar" type="ColorRect" parent="MarginContainer/Meter"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = -2.0
+grow_horizontal = 2
+mouse_filter = 1
+color = Color(0, 0, 0, 1)
+
+[node name="BottomBar" type="ColorRect" parent="MarginContainer/Meter"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 1
+color = Color(0, 0, 0, 1)
+
+[node name="MidwayPoint" type="ColorRect" parent="MarginContainer/Meter"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 15.0
+offset_top = -0.5
+offset_right = -15.0
+offset_bottom = 1.5
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+color = Color(0, 0, 0, 1)
+
+[node name="MiddleBar" type="ColorRect" parent="MarginContainer/Meter"]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_right = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+color = Color(0, 0, 0, 1)
+
+[node name="PlayerDepthMarker" type="ColorRect" parent="MarginContainer/Meter"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.005
+anchor_right = 0.5
+anchor_bottom = 0.005
+offset_left = -7.0
+offset_top = -0.925
+offset_right = 7.0
+offset_bottom = 0.895
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="MaxDepth" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "0m"
+label_settings = SubResource("LabelSettings_5i8nk")
+horizontal_alignment = 2
+
+[connection signal="changed" from="." to="." method="_on_changed"]
+[connection signal="value_changed" from="." to="." method="_on_value_changed"]

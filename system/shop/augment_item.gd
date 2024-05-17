@@ -1,7 +1,11 @@
 class_name Augment
 extends ShopItem
 
-@export var level: int = 1
+@export var level: int = 1:
+	get: 
+		return level
+	set(value):
+		level = value
 
 @export var dict_level_description: Dictionary = {
 }

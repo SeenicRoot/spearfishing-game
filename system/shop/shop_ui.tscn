@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://cbvjd7vxiwns3"]
+[gd_scene load_steps=3 format=3 uid="uid://b8njmboqctw41"]
 
 [ext_resource type="Script" path="res://system/shop/shop_ui.gd" id="1_rsdfu"]
-[ext_resource type="PackedScene" uid="uid://xjvw3tc0hwi3" path="res://system/shop/shop_item_ui.tscn" id="2_rsjy4"]
+[ext_resource type="PackedScene" uid="uid://cuyhj788ikisd" path="res://system/shop/shop_item_ui.tscn" id="2_rsjy4"]
 
-[node name="ShopUserInterface" type="Control"]
+[node name="ShopUI" type="Control" node_paths=PackedStringArray("total_points")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,6 +11,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_rsdfu")
+total_points = NodePath("RightContainer/VBoxContainer/TotalPoints")
 
 [node name="LeftContainer" type="MarginContainer" parent="."]
 layout_mode = 2

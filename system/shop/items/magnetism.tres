@@ -7,11 +7,8 @@
 [resource]
 script = ExtResource("1_j0eeq")
 level = 1
-dict_level_description = {
-1: "Allows player to absorb nearby fishes",
-2: "Increase the radius of the magnet moderately",
-3: "Increase the radius of the magnet significantly"
-}
+description_per_level = Array[String](["Allows player to absorb nearby fishes", "Increase the radius of the magnet moderately", "Increase the radius of the magnet significantly"])
+cost_per_level = Array[int]([500, 1000, 2000])
 name = "Magnetism"
 texture = SubResource("PlaceholderTexture2D_vu08u")
 description = ""

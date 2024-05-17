@@ -10,11 +10,8 @@ region = Rect2(31.4847, 0, 8.78349, 8)
 [resource]
 script = ExtResource("1_m8sde")
 level = 1
-dict_level_description = {
-1: "increase the oxygen level by a small amount",
-2: "increase the oxygen level by a moderate amount",
-3: "increase the oxygen level by a large amount"
-}
+description_per_level = Array[String](["increase the oxygen level by a small amount", "increase the oxygen level by a moderate amount", "increase the oxygen level by a large amount"])
+cost_per_level = Array[int]([100, 500, 2000])
 name = "IncreaseOxygenTankCapacity"
 texture = SubResource("AtlasTexture_mtje5")
 description = ""

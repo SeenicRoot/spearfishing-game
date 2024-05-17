@@ -1,22 +1,18 @@
 class_name Augment
 extends ShopItem
 
-@export var level: int = 1: get = _get_level,  set = _set_level
-func _get_level(): 
-	return level
-func _set_level(value : int):
-	level = value
 
-@export var dict_level_description: Dictionary = {}
+@export var description_per_level: Array[String] = []
+@export var cost_per_level: Array[int] = []
+@export var level: int = 1:
+	set(val):
+		level = val
 
-func update_level(level) -> int:
-	return level + 1
-
-func update_description(dict_level_description) -> String:
-	description = str(dict_level_description)
-	return description
+func get_description() -> String:
+	return description_per_level[level - 1]
 	
-func update_cost(level) -> int:
-	var cost_factor = level * 5
-	cost = cost * cost_factor
-	return cost
+func get_cost() -> int:
+	return cost_per_level[level - 1]
+
+func increment_level() -> void:
+	level += 1

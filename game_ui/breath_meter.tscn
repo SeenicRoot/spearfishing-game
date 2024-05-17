@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://dg2tii4rdj4iy"]
+
+[node name="BreathMeter" type="ProgressBar"]
+anchors_preset = -1
+anchor_left = 0.492188
+anchor_top = 0.0611111
+anchor_right = 0.6
+anchor_bottom = 0.894444
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 16
+fill_mode = 3
+metadata/_edit_use_anchors_ = true

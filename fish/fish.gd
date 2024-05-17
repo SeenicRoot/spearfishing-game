@@ -1,9 +1,9 @@
 class_name Fish
 extends CharacterBody2D
 
-const VELOCITY_LIMIT: float = 50.0
-
-@export var speed: float = 60
+@export var speed: float = 60.0
+@export var point_value: int = 10
+@export var velocity_limit: float = 50.0
 
 var direction: Vector2
 var previous_direction: Vector2
@@ -17,15 +17,13 @@ var is_being_attacked: bool = false
 
 func move(delta: float) -> void:
 	if is_being_attacked:
-		speed = 120
 		change_sprite_direction()
-		velocity += direction * speed * delta
-		velocity = velocity.limit_length(VELOCITY_LIMIT)
+		velocity += direction * (2 * speed) * delta
+		velocity = velocity.limit_length(velocity_limit)
 	else:
-		speed = 60
 		change_sprite_direction()
 		velocity += direction * speed * delta
-		velocity = velocity.limit_length(VELOCITY_LIMIT/2)
+		velocity = velocity.limit_length(velocity_limit/2)
 	move_and_slide()
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.

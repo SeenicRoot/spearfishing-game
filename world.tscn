@@ -1,5 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://dinwsk6yoe6t3"]
+[gd_scene load_steps=8 format=3 uid="uid://dinwsk6yoe6t3"]
 
+[ext_resource type="Script" path="res://world.gd" id="1_834mx"]
 [ext_resource type="TileSet" uid="uid://c6l48pd00c62j" path="res://tilemap/water_tileset.tres" id="1_855xw"]
 [ext_resource type="Script" path="res://Ocean.gd" id="2_i2g8e"]
 [ext_resource type="PackedScene" uid="uid://biip1hld5vpp0" path="res://fish/fish.tscn" id="3_jf4a3"]
@@ -13,6 +14,8 @@ normal = Vector2(0, 1)
 distance = -4.0
 
 [node name="World" type="Node2D"]
+script = ExtResource("1_834mx")
+fish_scenes = Array[PackedScene]([ExtResource("3_jf4a3"), ExtResource("4_brv5i")])
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -46,10 +49,6 @@ shape = SubResource("WorldBoundaryShape2D_m8jfr")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SurfaceBarrier"]
 shape = SubResource("WorldBoundaryShape2D_mtwbk")
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="Fishes" type="Node2D" parent="."]
 
-[node name="fish" parent="Node2D" instance=ExtResource("3_jf4a3")]
-position = Vector2(-2, 178)
-
-[node name="squid" parent="Node2D" instance=ExtResource("4_brv5i")]
-position = Vector2(88, 128)
+[node name="Chunks" type="Node2D" parent="."]

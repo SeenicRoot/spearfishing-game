@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://c7i7rlhaxrysg"]
+[gd_scene load_steps=7 format=3 uid="uid://c7i7rlhaxrysg"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_qhivd"]
 [ext_resource type="PackedScene" uid="uid://dinwsk6yoe6t3" path="res://world.tscn" id="2_xe030"]
 [ext_resource type="PackedScene" uid="uid://bpumku3jmxiy2" path="res://player/player.tscn" id="3_n6v6i"]
 [ext_resource type="AudioStream" uid="uid://b6md60qg43n5m" path="res://assets/Serenity (RT 5.361)/Ambient Vol4 Serenity Intensity 2.wav" id="4_psqwg"]
+[ext_resource type="PackedScene" uid="uid://cbvjd7vxiwns3" path="res://system/shop/shop_ui.tscn" id="4_s6nm6"]
 [ext_resource type="PackedScene" uid="uid://du51w3xldgq6o" path="res://game_ui/game_ui.tscn" id="5_il6fy"]
 
 [node name="Main" type="Node"]
@@ -15,6 +16,10 @@ music = ExtResource("4_psqwg")
 [node name="GameUI" parent="CanvasLayer" instance=ExtResource("5_il6fy")]
 unique_name_in_owner = true
 mouse_filter = 2
+
+[node name="ShopUI" parent="." instance=ExtResource("4_s6nm6")]
+offset_top = -334.0
+offset_bottom = -334.0
 
 [node name="World" parent="." instance=ExtResource("2_xe030")]
 unique_name_in_owner = true

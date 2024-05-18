@@ -4,7 +4,7 @@ extends Control
 @export var title: Label
 @export var level: Label
 
-@export var item_description: RichTextLabel
+@export var item_description: Label
 @export var charges = Label
 @export var cost = Label
 @export var buy = Button
@@ -12,8 +12,8 @@ extends Control
 var selected_item: ShopItem
 
 @onready var shop: Shop = preload("res://system/shop/shop.tres")
-@onready var items: Array = $LeftContainer/GridContainer.get_children()
-@onready var item_visual: TextureRect = $RightContainer/VBoxContainer/ShopItem/MarginContainer/ItemDisplay
+@onready var items: Array = $ShopBox/Panel/GridContainer.get_children()
+@onready var item_visual: TextureRect = $DescriptionBox/Panel/VBoxContainer/ShopItem/MarginContainer/ItemDisplay
 
 var my_points: int = 1000
 

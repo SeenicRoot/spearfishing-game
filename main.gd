@@ -25,6 +25,7 @@ var camera_offset_y: float = 0.0
 @onready var depth_meter: ProgressBar = %GameUI/%DepthMeter
 @onready var breath_meter: ProgressBar = %GameUI/%BreathMeter
 @onready var dive_points_display: Label = %GameUI/Score
+@onready var shop_ui: Control = $ShopUI
 
 
 func _ready() -> void:
@@ -34,16 +35,18 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if game_running:
-		follow_camera_to_player()
+		follow_player()
 		update_player_depth()
 
 
-func follow_camera_to_player() -> void:
+func follow_player() -> void:
 	world_camera.global_position.x = player.global_position.x
 	if not player.is_surfaced:
 		world_camera.global_position.y = player.global_position.y + camera_offset_y
 	else:
 		camera_offset_y = CAMERA_SURFACE_OFFSET_Y - player.global_position.y
+
+	shop_ui.global_position.x = player.global_position.x - shop_ui.size.x / 2
 	
 
 func change_camera_view() -> void:

@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://biip1hld5vpp0"]
+[gd_scene load_steps=10 format=3 uid="uid://biip1hld5vpp0"]
 
 [ext_resource type="Script" path="res://fish/fish.gd" id="1_reuv0"]
+[ext_resource type="PhysicsMaterial" uid="uid://0o0bcxqo1x5n" path="res://fish/fish_physics.tres" id="1_rj7dy"]
 [ext_resource type="Texture2D" uid="uid://cuc2xp8rby7es" path="res://assets/SpearFishing Assets Pack/Sprites/Fish1 - 16x16/Orange.png" id="2_ooy0t"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_46w37"]
@@ -42,7 +43,9 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_e5rhc"]
 radius = 6.0
 
-[node name="fish" type="CharacterBody2D"]
+[node name="fish" type="RigidBody2D"]
+physics_material_override = ExtResource("1_rj7dy")
+lock_rotation = true
 script = ExtResource("1_reuv0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

@@ -6,6 +6,7 @@ signal captured_fish(fishes: Array[Fish])
 
 const DECELERATION = 10.0
 
+@onready var harpoon_collision_shape: CollisionShape2D = get_node("HarpoonLauncher/Harpoon/CollisionShape2D")
 @export var harpoon_speed: float = 500
 @export var reel_back_speed: float = 200
 @export var harpoon_reset_position: Vector2 = Vector2.ZERO
@@ -25,6 +26,7 @@ var flip_v: bool = false:
 
 var loaded: bool = true
 var reeling_harpoon: bool = false
+var harpoon_range_ratio: float = 1
 var harpoon_velocity: float = 0
 var harpoon_direction: Vector2 = Vector2.ZERO
 var hooked_fishes: Array[Fish] = []
@@ -57,7 +59,7 @@ func shoot() -> void:
 
 func move_harpoon(delta: float) -> void:
 	if harpoon_velocity > 0:
-		harpoon.global_position += harpoon_direction * harpoon_velocity * delta
+		harpoon.global_position += harpoon_range_ratio * harpoon_direction * harpoon_velocity * delta
 		harpoon_velocity -= DECELERATION
 	else:
 		# return the harpoon to the harpoon_speed launcher

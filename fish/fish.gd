@@ -15,6 +15,7 @@ var is_being_attacked: bool = false
 @onready var animated_sprite_2d := $AnimatedSprite2D as AnimatedSprite2D
 @onready var timer := $Timer as Timer
 
+
 func move(delta: float) -> void:
 	if is_being_attacked:
 		change_sprite_direction()
@@ -58,3 +59,4 @@ func change_sprite_direction() -> void:
 		animated_sprite_2d.flip_h = true
 	else:
 		animated_sprite_2d.flip_h = false
+

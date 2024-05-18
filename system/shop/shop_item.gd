@@ -1,6 +1,12 @@
 class_name ShopItem
 extends Resource
 
+enum UpgradeType {
+	PLAYER,
+	FISH
+}
+
+@export var upgrade_type: UpgradeType
 @export var name: String = ""
 @export var texture: Texture2D
 @export_multiline var description: String:
@@ -13,3 +19,6 @@ func get_description() -> String:
 	
 func get_cost() -> int:
 	return cost
+
+func apply_upgrade(object: Object) -> void:
+	pass

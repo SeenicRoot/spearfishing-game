@@ -1,5 +1,7 @@
 extends Node
 
+signal player_upgraded(player: Player)
+
 const CAMERA_SURFACE_OFFSET_Y = -75
 const SURFACE_THRESHOLD = 5
 

@@ -8,7 +8,9 @@
 script = ExtResource("1_1rome")
 description_per_level = Array[String](["Increase swim speed by 25%", "Increase swim speed by 50%", "<nullIncrease swim speed by 100%>"])
 cost_per_level = Array[int]([100, 500, 1500])
+my_level = 0
 level = 1
+upgrade_type = 0
 name = "Agility"
 texture = SubResource("PlaceholderTexture2D_vu08u")
 description = ""

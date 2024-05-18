@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dvwcc4ugajrab"
-path="res://.godot/imported/Chests_Snow.png-974a1e73c972bbcc8892fbf5eaf20e29.ctex"
+path="res://.godot/imported/Chests_Snow.png-8e05be2d97fc4c0d17ced45a5d60cd9b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Animated Chests/Animated Chests/Chests_Snow.png"
-dest_files=["res://.godot/imported/Chests_Snow.png-974a1e73c972bbcc8892fbf5eaf20e29.ctex"]
+source_file="res://assets/Animated Chests/Chests_Snow.png"
+dest_files=["res://.godot/imported/Chests_Snow.png-8e05be2d97fc4c0d17ced45a5d60cd9b.ctex"]
 
 [params]
 

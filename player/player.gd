@@ -4,7 +4,6 @@ extends CharacterBody2D
 signal max_breath_changed(max_value: float)
 signal breath_changed(value: float)
 signal surfaced
-signal panicked
 signal fishes_changed(captured_fishes: Array[Dictionary])
 
 const SWIM_ANIMATION = &"swim"

@@ -1,7 +1,8 @@
 extends Node
 
+const World = preload("res://world.gd")
+
 const CAMERA_SURFACE_OFFSET_Y = -75
-const SURFACE_THRESHOLD = 5
 
 @export var music: AudioStream
 
@@ -18,7 +19,7 @@ var camera_follow_player: bool = true
 var camera_offset_y: float = 0.0
 
 @onready var game_ui: Control = %GameUI
-@onready var world: Node2D = %World
+@onready var world: World = %World
 @onready var world_camera: Camera2D = %World/Camera2D
 @onready var player: Player = %World/Player
 @onready var depth_meter: ProgressBar = %GameUI/%DepthMeter
@@ -41,15 +42,17 @@ func follow_camera_to_player() -> void:
 	world_camera.global_position.x = player.global_position.x
 	if not player.is_surfaced:
 		world_camera.global_position.y = player.global_position.y + camera_offset_y
+	else:
+		camera_offset_y = CAMERA_SURFACE_OFFSET_Y - player.global_position.y
 	
+
 func change_camera_view() -> void:
 	if player.is_surfaced:
 		var tween := create_tween()
 		tween.tween_property(world_camera, "position:y", CAMERA_SURFACE_OFFSET_Y, 1)
 	else:
-		var y_distance := world_camera.global_position.y - player.global_position.y
 		var tween := create_tween()
-		tween.tween_property(self, "camera_offset_y", 0.0, 1).from(y_distance)
+		tween.tween_property(self, "camera_offset_y", 0.0, 1)
 		
 
 func start_game() -> void:
@@ -92,8 +95,7 @@ func update_player_depth() -> void:
 			tween.tween_property(depth_meter, "modulate:a", 0, 2)
 			await tween.finished
 			depth_meter.visible = false
-	
-	
+
 	depth_meter.value = player.position.y
 	depth_meter.max_value = max_depth
 
@@ -107,15 +109,21 @@ func _on_surface_body_entered(body: Node2D) -> void:
 		max_depth = 0
 		change_camera_view()
 		player.captured_fishes = []
+		world.clear_chunks()
 	else:
 		body.queue_free()
 
 
 func _on_surface_body_exited(body: Node2D) -> void:
-	if body.name == "Player":
+	if body is Player:
 		player.is_surfaced = false
 		show_surface = false
 		change_camera_view()
+		
+		randomize()
+
+		world.recreate_chunks.call_deferred(player.global_position)
+
 
 func _on_fishes_changed(captured_fishes: Array[Dictionary]) -> void:
 	dive_points = captured_fishes.reduce(func (accum, fish): return accum + fish.value, 0)

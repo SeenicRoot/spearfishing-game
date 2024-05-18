@@ -1,7 +1,24 @@
-[gd_scene load_steps=3 format=3 uid="uid://cbvjd7vxiwns3"]
+[gd_scene load_steps=9 format=3 uid="uid://cbvjd7vxiwns3"]
 
 [ext_resource type="Script" path="res://system/shop/shop_ui.gd" id="1_rsdfu"]
+[ext_resource type="Theme" uid="uid://dcvafyjjpigjl" path="res://theme.tres" id="2_56whv"]
 [ext_resource type="PackedScene" uid="uid://cuyhj788ikisd" path="res://system/shop/shop_item_ui.tscn" id="2_rsjy4"]
+[ext_resource type="Texture2D" uid="uid://co0ebgup2mj8l" path="res://assets/gui/Custom Border and Panels Menu All Part/Border All 16.png" id="3_22pvf"]
+[ext_resource type="Texture2D" uid="uid://cq2sbhe4l52p6" path="res://assets/gui/Pixel UI pack 1.png" id="4_vgb8p"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kr2v2"]
+bg_color = Color(0.984314, 0.87451, 0.647059, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ja51n"]
+atlas = ExtResource("4_vgb8p")
+region = Rect2(129, 129, 46, 30)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gahgg"]
+content_margin_left = 10.0
+content_margin_top = 6.0
+content_margin_right = 10.0
+content_margin_bottom = 6.0
+texture = SubResource("AtlasTexture_ja51n")
 
 [node name="ShopUI" type="Control" node_paths=PackedStringArray("total_points", "title", "level", "item_description", "charges", "cost", "buy")]
 layout_mode = 3
@@ -11,141 +28,280 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_rsdfu")
-total_points = NodePath("RightContainer/VBoxContainer/TotalPoints")
-title = NodePath("RightContainer/VBoxContainer/Title")
-level = NodePath("RightContainer/VBoxContainer/Level")
-item_description = NodePath("RightContainer/VBoxContainer/MarginContainer/Description")
-charges = NodePath("RightContainer/VBoxContainer/Charges")
-cost = NodePath("RightContainer/VBoxContainer/Cost")
-buy = NodePath("RightContainer/VBoxContainer/Buy")
+total_points = NodePath("DescriptionBox/Panel/VBoxContainer/TotalPoints")
+title = NodePath("DescriptionBox/Panel/VBoxContainer/Title")
+level = NodePath("DescriptionBox/Panel/VBoxContainer/Level")
+item_description = NodePath("DescriptionBox/Panel/VBoxContainer/MarginContainer/Control/Description")
+charges = NodePath("DescriptionBox/Panel/VBoxContainer/Charges")
+cost = NodePath("DescriptionBox/Panel/VBoxContainer/HBoxContainer/Cost")
+buy = NodePath("DescriptionBox/Panel/VBoxContainer/HBoxContainer/Control/Buy")
 
-[node name="LeftContainer" type="MarginContainer" parent="."]
-layout_mode = 2
-offset_left = 32.0
-offset_top = 32.0
-offset_right = 368.0
-offset_bottom = 288.0
-theme_override_constants/margin_left = 32
-theme_override_constants/margin_top = 32
-theme_override_constants/margin_right = 32
-theme_override_constants/margin_bottom = 32
+[node name="ShopBox" type="Control" parent="."]
+layout_mode = 1
+anchor_left = 0.159375
+anchor_top = 0.425
+anchor_right = 0.460938
+anchor_bottom = 0.869444
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
 
-[node name="GridContainer" type="GridContainer" parent="LeftContainer"]
-layout_mode = 2
+[node name="Border" type="NinePatchRect" parent="ShopBox"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_56whv")
+theme_type_variation = &"TexturePanel"
+texture = ExtResource("3_22pvf")
+draw_center = false
+region_rect = Rect2(0, 256, 64, 64)
+patch_margin_left = 7
+patch_margin_top = 7
+patch_margin_right = 7
+patch_margin_bottom = 8
+
+[node name="Panel" type="Panel" parent="ShopBox"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0295359
+anchor_top = 0.0360825
+anchor_right = 0.970464
+anchor_bottom = 0.958763
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_56whv")
+theme_override_styles/panel = SubResource("StyleBoxFlat_kr2v2")
+metadata/_edit_use_anchors_ = true
+
+[node name="ShopName" type="Label" parent="ShopBox/Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -34.5
+offset_top = 2.0
+offset_right = 34.5
+offset_bottom = 32.0
+grow_horizontal = 2
+theme = ExtResource("2_56whv")
+text = "Shop"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="ShopBox/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 23.0
+grow_horizontal = 2
+grow_vertical = 2
 columns = 4
 
-[node name="ShopItem" parent="LeftContainer/GridContainer" instance=ExtResource("2_rsjy4")]
+[node name="ShopItem" parent="ShopBox/Panel/GridContainer" instance=ExtResource("2_rsjy4")]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
+flat = true
 
-[node name="ShopItem2" parent="LeftContainer/GridContainer" instance=ExtResource("2_rsjy4")]
+[node name="ShopItem2" parent="ShopBox/Panel/GridContainer" instance=ExtResource("2_rsjy4")]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
+flat = true
 
-[node name="ShopItem3" parent="LeftContainer/GridContainer" instance=ExtResource("2_rsjy4")]
+[node name="ShopItem3" parent="ShopBox/Panel/GridContainer" instance=ExtResource("2_rsjy4")]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
+flat = true
 
-[node name="ShopItem4" parent="LeftContainer/GridContainer" instance=ExtResource("2_rsjy4")]
+[node name="ShopItem4" parent="ShopBox/Panel/GridContainer" instance=ExtResource("2_rsjy4")]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
+flat = true
 
-[node name="ShopItem5" parent="LeftContainer/GridContainer" instance=ExtResource("2_rsjy4")]
+[node name="ShopItem5" parent="ShopBox/Panel/GridContainer" instance=ExtResource("2_rsjy4")]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
+flat = true
 
-[node name="ShopItem6" parent="LeftContainer/GridContainer" instance=ExtResource("2_rsjy4")]
+[node name="ShopItem6" parent="ShopBox/Panel/GridContainer" instance=ExtResource("2_rsjy4")]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
+flat = true
 
-[node name="ShopItem7" parent="LeftContainer/GridContainer" instance=ExtResource("2_rsjy4")]
+[node name="ShopItem7" parent="ShopBox/Panel/GridContainer" instance=ExtResource("2_rsjy4")]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
+flat = true
 
-[node name="ShopItem8" parent="LeftContainer/GridContainer" instance=ExtResource("2_rsjy4")]
+[node name="ShopItem8" parent="ShopBox/Panel/GridContainer" instance=ExtResource("2_rsjy4")]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
+flat = true
 
-[node name="ShopItem9" parent="LeftContainer/GridContainer" instance=ExtResource("2_rsjy4")]
+[node name="ShopItem9" parent="ShopBox/Panel/GridContainer" instance=ExtResource("2_rsjy4")]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
+flat = true
 
-[node name="ShopItem10" parent="LeftContainer/GridContainer" instance=ExtResource("2_rsjy4")]
+[node name="ShopItem10" parent="ShopBox/Panel/GridContainer" instance=ExtResource("2_rsjy4")]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
+flat = true
 
-[node name="ShopItem11" parent="LeftContainer/GridContainer" instance=ExtResource("2_rsjy4")]
+[node name="ShopItem11" parent="ShopBox/Panel/GridContainer" instance=ExtResource("2_rsjy4")]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
+flat = true
 
-[node name="ShopItem12" parent="LeftContainer/GridContainer" instance=ExtResource("2_rsjy4")]
+[node name="ShopItem12" parent="ShopBox/Panel/GridContainer" instance=ExtResource("2_rsjy4")]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
+flat = true
 
-[node name="RightContainer" type="MarginContainer" parent="."]
-layout_mode = 0
-offset_left = 400.0
-offset_top = 32.0
-offset_right = 608.0
-offset_bottom = 288.0
+[node name="DescriptionBox" type="Control" parent="."]
+layout_mode = 1
+anchor_left = 0.4875
+anchor_top = 0.222222
+anchor_right = 0.853125
+anchor_bottom = 0.888889
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="RightContainer"]
+[node name="Border" type="NinePatchRect" parent="DescriptionBox"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_56whv")
+theme_type_variation = &"TexturePanel"
+texture = ExtResource("3_22pvf")
+draw_center = false
+region_rect = Rect2(0, 256, 64, 64)
+patch_margin_left = 7
+patch_margin_top = 7
+patch_margin_right = 7
+patch_margin_bottom = 8
+
+[node name="Panel" type="Panel" parent="DescriptionBox"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 7.0
+offset_top = 7.0
+offset_right = -7.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_56whv")
+theme_override_styles/panel = SubResource("StyleBoxFlat_kr2v2")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DescriptionBox/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 6.0
+offset_top = 7.0
+offset_right = -7.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_56whv")
+
+[node name="TotalPoints" type="Label" parent="DescriptionBox/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
+text = "Total: 100 000 pts"
+horizontal_alignment = 1
+autowrap_mode = 2
+clip_text = true
 
-[node name="TotalPoints" type="Label" parent="RightContainer/VBoxContainer"]
+[node name="Title" type="Label" parent="DescriptionBox/Panel/VBoxContainer"]
 layout_mode = 2
-text = "Total points (placeholder)"
+text = "Item Name"
 horizontal_alignment = 1
 
-[node name="ShopItem" parent="RightContainer/VBoxContainer" instance=ExtResource("2_rsjy4")]
+[node name="ShopItem" parent="DescriptionBox/Panel/VBoxContainer" instance=ExtResource("2_rsjy4")]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+disabled = true
+flat = true
 
-[node name="Title" type="Label" parent="RightContainer/VBoxContainer"]
+[node name="Level" type="Label" parent="DescriptionBox/Panel/VBoxContainer"]
 layout_mode = 2
+text = "Lvl 1"
 horizontal_alignment = 1
 
-[node name="Level" type="Label" parent="RightContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="DescriptionBox/Panel/VBoxContainer"]
 layout_mode = 2
-text = "Lvl Placeholder"
-horizontal_alignment = 1
+size_flags_vertical = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="RightContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 112)
+[node name="Control" type="Control" parent="DescriptionBox/Panel/VBoxContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="Description" type="RichTextLabel" parent="RightContainer/VBoxContainer/MarginContainer"]
-layout_mode = 2
-text = "Description (placeholder)"
+[node name="Description" type="Label" parent="DescriptionBox/Panel/VBoxContainer/MarginContainer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 8
+text = "Description:"
 
-[node name="Charges" type="Label" parent="RightContainer/VBoxContainer"]
+[node name="Charges" type="Label" parent="DescriptionBox/Panel/VBoxContainer"]
 layout_mode = 2
 text = "Charges: Placeholder
 "
 horizontal_alignment = 1
 
-[node name="Cost" type="Label" parent="RightContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="DescriptionBox/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 37.285)
 layout_mode = 2
-text = "Cost: Placeholder
-"
-horizontal_alignment = 1
+alignment = 1
 
-[node name="Buy" type="Button" parent="RightContainer/VBoxContainer"]
+[node name="Control" type="Control" parent="DescriptionBox/Panel/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Buy" type="Button" parent="DescriptionBox/Panel/VBoxContainer/HBoxContainer/Control"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -56.0
+grow_horizontal = 0
+grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_override_styles/normal = SubResource("StyleBoxTexture_gahgg")
 text = "Buy
+"
+
+[node name="Cost" type="Label" parent="DescriptionBox/Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 16
+text = "Cost: 100000
 "

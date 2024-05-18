@@ -1,9 +1,24 @@
-[gd_scene load_steps=4 format=3 uid="uid://du51w3xldgq6o"]
+[gd_scene load_steps=6 format=3 uid="uid://du51w3xldgq6o"]
 
 [ext_resource type="PackedScene" uid="uid://8ni02sje7pwo" path="res://game_ui/depth_meter.tscn" id="1_5wxlb"]
 [ext_resource type="PackedScene" uid="uid://dg2tii4rdj4iy" path="res://game_ui/breath_meter.tscn" id="2_tvqgf"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_c8f0n"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pno8a"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1pee2"]
+bg_color = Color(0.482353, 0.627451, 0.709804, 0.627451)
 
 [node name="GameUI" type="Control"]
 layout_mode = 3
@@ -39,14 +54,13 @@ mouse_filter = 1
 
 [node name="DepthMeter" parent="MarginContainer/Control" instance=ExtResource("1_5wxlb")]
 unique_name_in_owner = true
-modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 9
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 1.0
-offset_right = 53.0
+offset_right = 34.0
 grow_vertical = 2
 
 [node name="BreathMeter" parent="MarginContainer/Control" instance=ExtResource("2_tvqgf")]
@@ -57,8 +71,10 @@ anchor_left = 1.0
 anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -38.0
+offset_left = -20.0
 grow_horizontal = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_pno8a")
+theme_override_styles/fill = SubResource("StyleBoxFlat_1pee2")
 value = 50.0
 allow_greater = true
 show_percentage = false

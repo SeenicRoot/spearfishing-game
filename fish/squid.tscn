@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://wwmhd6oa8opb"]
+[gd_scene load_steps=10 format=3 uid="uid://wwmhd6oa8opb"]
 
 [ext_resource type="Texture2D" uid="uid://cg5r6b16juhy3" path="res://assets/SpearFishing Assets Pack/Sprites/Squid - 32x16.png" id="1_5m8dh"]
 [ext_resource type="Script" path="res://fish/squid.gd" id="1_7fu64"]
+[ext_resource type="PhysicsMaterial" uid="uid://0o0bcxqo1x5n" path="res://fish/fish_physics.tres" id="1_wi2ab"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j6k5v"]
 atlas = ExtResource("1_5m8dh")
@@ -42,8 +43,11 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_f2pne"]
 radius = 6.0
 
-[node name="squid" type="CharacterBody2D"]
+[node name="squid" type="RigidBody2D"]
+physics_material_override = ExtResource("1_wi2ab")
+lock_rotation = true
 script = ExtResource("1_7fu64")
+point_value = 5
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_y08gg")

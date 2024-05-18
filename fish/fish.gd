@@ -1,9 +1,8 @@
 class_name Fish
-extends CharacterBody2D
+extends RigidBody2D
 
-@export var speed: float = 60.0
+@export var acceleration: float = 60.0
 @export var point_value: int = 10
-@export var velocity_limit: float = 50.0
 
 var direction: Vector2
 var previous_direction: Vector2
@@ -15,25 +14,23 @@ var is_being_attacked: bool = false
 @onready var animated_sprite_2d := $AnimatedSprite2D as AnimatedSprite2D
 @onready var timer := $Timer as Timer
 
-func move(delta: float) -> void:
-	if is_being_attacked:
-		change_sprite_direction()
-		velocity += direction * (2 * speed) * delta
-		velocity = velocity.limit_length(velocity_limit)
-	else:
-		change_sprite_direction()
-		velocity += direction * speed * delta
-		velocity = velocity.limit_length(velocity_limit/2)
-	move_and_slide()
-	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	if can_move:
 		move(delta)
 
+
+func move(_delta: float) -> void:
+	if is_being_attacked:
+		change_sprite_direction()
+		apply_central_force(direction * acceleration * 2)
+	else:
+		change_sprite_direction()
+		apply_central_force(direction * acceleration)
+	
+
 func _on_timer_timeout() -> void:
 	timer.wait_time = [1.0, 1.5, 2.0].pick_random()
-	is_being_attacked = [false, true].pick_random()
 	if can_move:
 		var weight = randf()
 		direction = [Vector2.LEFT, Vector2.RIGHT, Vector2.UP, Vector2.DOWN].pick_random()

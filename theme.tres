@@ -1,0 +1,23 @@
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://dcvafyjjpigjl"]
+
+[ext_resource type="Texture2D" uid="uid://cq2sbhe4l52p6" path="res://assets/gui/Pixel UI pack 1.png" id="1_pqn8i"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3mgcw"]
+bg_color = Color(0.985281, 0.873129, 0.647353, 1)
+shadow_color = Color(0, 0, 0, 0.839216)
+anti_aliasing = false
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u2uuu"]
+atlas = ExtResource("1_pqn8i")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ugba3"]
+content_margin_left = 8.0
+texture = SubResource("AtlasTexture_u2uuu")
+
+[resource]
+default_font_size = 16
+Label/colors/font_color = Color(0.332881, 0.332881, 0.332881, 1)
+Panel/styles/panel = SubResource("StyleBoxFlat_3mgcw")
+TexturePanel/base_type = &"Panel"
+TexturePanel/styles/panel = SubResource("StyleBoxTexture_ugba3")

@@ -1,9 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://du51w3xldgq6o"]
+[gd_scene load_steps=7 format=3 uid="uid://du51w3xldgq6o"]
 
 [ext_resource type="PackedScene" uid="uid://8ni02sje7pwo" path="res://game_ui/depth_meter.tscn" id="1_5wxlb"]
 [ext_resource type="PackedScene" uid="uid://dg2tii4rdj4iy" path="res://game_ui/breath_meter.tscn" id="2_tvqgf"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_c8f0n"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_04qsf"]
+font_size = 32
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pno8a"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -31,10 +34,28 @@ mouse_filter = 1
 
 [node name="Score" type="Label" parent="."]
 layout_mode = 1
-offset_right = 84.0
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -84.0
 offset_bottom = 23.0
-text = "Points:"
+grow_horizontal = 0
+text = "0pts"
 label_settings = SubResource("LabelSettings_c8f0n")
+horizontal_alignment = 2
+
+[node name="Highscore" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -120.0
+offset_top = 33.0
+offset_right = 120.0
+offset_bottom = 73.0
+grow_horizontal = 2
+text = "Highscore: 0"
+label_settings = SubResource("LabelSettings_04qsf")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -44,7 +65,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 25
-theme_override_constants/margin_top = 20
+theme_override_constants/margin_top = 35
 theme_override_constants/margin_right = 25
 theme_override_constants/margin_bottom = 20
 

@@ -1,0 +1,94 @@
+[gd_scene load_steps=14 format=3 uid="uid://die2ln70woqur"]
+
+[ext_resource type="PhysicsMaterial" path="res://fish/fish_physics.tres" id="1_qqnb6"]
+[ext_resource type="Script" path="res://fish/red_fish.gd" id="2_ugin5"]
+[ext_resource type="Texture2D" uid="uid://c5mj517lxa06u" path="res://assets/SpearFishing Assets Pack/Sprites/Fish3 - 32x16/Red.png" id="3_8im08"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a1ioa"]
+atlas = ExtResource("3_8im08")
+region = Rect2(0, 16, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_85ebv"]
+atlas = ExtResource("3_8im08")
+region = Rect2(32, 16, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i3w70"]
+atlas = ExtResource("3_8im08")
+region = Rect2(64, 16, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_snwqv"]
+atlas = ExtResource("3_8im08")
+region = Rect2(96, 16, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kc2cu"]
+atlas = ExtResource("3_8im08")
+region = Rect2(128, 16, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iffnm"]
+atlas = ExtResource("3_8im08")
+region = Rect2(160, 16, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0p615"]
+atlas = ExtResource("3_8im08")
+region = Rect2(192, 16, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0dtym"]
+atlas = ExtResource("3_8im08")
+region = Rect2(224, 16, 32, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cjvak"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a1ioa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_85ebv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i3w70")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_snwqv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kc2cu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iffnm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0p615")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0dtym")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ouwn4"]
+radius = 3.0
+height = 16.0
+
+[node name="red_fish" type="RigidBody2D"]
+physics_material_override = ExtResource("1_qqnb6")
+lock_rotation = true
+script = ExtResource("2_ugin5")
+acceleration = 120.0
+point_value = 25
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_cjvak")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, 1)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_ouwn4")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

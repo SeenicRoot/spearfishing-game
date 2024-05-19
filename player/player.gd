@@ -4,6 +4,7 @@ extends CharacterBody2D
 signal max_breath_changed(max_value: float)
 signal breath_changed(value: float)
 signal surfaced
+signal dived
 signal fishes_changed(captured_fishes: Array[Dictionary])
 
 const SWIM_ANIMATION = &"swim"
@@ -21,12 +22,9 @@ const PANIC_SPEED = 500
 	set(val):
 		max_breath = val
 		max_breath_changed.emit(val)
+@export var bubble_sounds: Array[AudioStream]
 
-var is_surfaced = true:
-	set(val):
-		if val and not is_surfaced:
-			surfaced.emit()
-		is_surfaced = val
+var is_surfaced = true
 var can_move: bool = true
 var is_panicked: bool = false
 var is_accelerating: bool = false
@@ -45,14 +43,19 @@ var captured_fishes: Array[Dictionary] = []
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var fish_inventory: Node2D = $FishInventory
 @onready var panic_timer: Timer = $PanicTimer
+@onready var breath_particles: GPUParticles2D = $BreathParticles
+@onready var bubble_player: AudioStreamPlayer = $BubblePlayer
+@onready var breath_timer: Timer = $BreathTimer
 
 
 func _ready() -> void:
 	animation_player.current_animation = "swim"
 	breath = max_breath
 	surfaced.connect(_on_surfaced)
+	dived.connect(_on_dived)
 	harpoon_launcher.captured_fish.connect(_on_captured_fish)
 	panic_timer.timeout.connect(_on_panic_timer_timeout)
+	
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -115,6 +118,16 @@ func calculate_breath(delta: float) -> void:
 	if breath <= 0 and not is_panicked:
 		start_panic()
 
+
+func take_breath() -> void:
+	breath_particles.restart()
+	breath_particles.emitting = true
+	bubble_player.stream = bubble_sounds.pick_random()
+	var sound_length := bubble_player.stream.get_length()
+	breath_particles.explosiveness = (breath_particles.lifetime - sound_length) / breath_particles.lifetime
+	bubble_player.play()
+
+
 func shoot() -> void:
 	harpoon_launcher.shoot()
 
@@ -157,6 +170,7 @@ func drop_random_fish() -> void:
 func flip_player() -> void:
 	harpoon_launcher.position.x = -harpoon_launcher.position.x
 	harpoon_launcher.scale.y = -harpoon_launcher.scale.y
+	breath_particles.position.x = -breath_particles.position.x
 	sprite.flip_h = not sprite.flip_h
 	flipped = not flipped
 
@@ -181,6 +195,15 @@ func _on_surfaced() -> void:
 		is_panicked = false
 		panic_timer.stop()
 	can_move = true
+	is_surfaced = true
+	breath_timer.stop()
+	breath_particles.emitting = false
+
+
+func _on_dived() -> void:
+	is_surfaced = false
+	breath_timer.start()
+
 
 func _on_captured_fish(fishes: Array[Fish]) -> void:
 	for fish in fishes:

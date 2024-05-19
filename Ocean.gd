@@ -13,7 +13,3 @@ var map: Array[Vector2i] = get_used_cells(0)
 func _ready():
 	for i in range(BUBBLE_FREQUENCY):
 		set_cell(0, map.pick_random(), 0, bubbles.pick_random(), 0)
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass

@@ -4,8 +4,6 @@ const World = preload("res://world.gd")
 
 const CAMERA_SURFACE_OFFSET_Y = -75
 
-@export var music: AudioStream
-
 var game_running: bool = false
 var show_surface: bool = true
 var max_depth: float = 0.0
@@ -22,6 +20,8 @@ var camera_offset_y: float = 0.0
 @onready var world: World = %World
 @onready var world_camera: Camera2D = %World/Camera2D
 @onready var player: Player = %World/Player
+@onready var music_player: AudioStreamPlayer = $MusicPlayer
+
 @onready var depth_meter: ProgressBar = %GameUI/%DepthMeter
 @onready var breath_meter: ProgressBar = %GameUI/%BreathMeter
 @onready var dive_points_display: Label = %GameUI/Score
@@ -30,7 +30,6 @@ var camera_offset_y: float = 0.0
 
 func _ready() -> void:
 	start_game()
-	start_music()
 
 
 func _process(_delta: float) -> void:
@@ -71,14 +70,6 @@ func start_game() -> void:
 	
 	game_ui.visible = true
 	game_running = true
-	
-	
-func start_music() -> void:
-	var music_player = AudioStreamPlayer.new()
-	music_player.autoplay = true
-	music_player.stream = music
-	music_player.volume_db = -20
-	add_child(music_player)
 
 
 func update_player_depth() -> void:
@@ -105,7 +96,7 @@ func update_player_depth() -> void:
 
 func _on_surface_body_entered(body: Node2D) -> void:
 	if body is Player:
-		player.is_surfaced = true
+		player.surfaced.emit()
 		show_surface = true
 		total_points += dive_points
 		dive_points = 0
@@ -119,7 +110,7 @@ func _on_surface_body_entered(body: Node2D) -> void:
 
 func _on_surface_body_exited(body: Node2D) -> void:
 	if body is Player:
-		player.is_surfaced = false
+		player.dived.emit()
 		show_surface = false
 		change_camera_view()
 		
@@ -130,3 +121,11 @@ func _on_surface_body_exited(body: Node2D) -> void:
 
 func _on_fishes_changed(captured_fishes: Array[Dictionary]) -> void:
 	dive_points = captured_fishes.reduce(func (accum, fish): return accum + fish.value, 0)
+	
+	
+func _on_audio_player_finished() -> void:
+	music_player.play()
+
+
+func _on_music_player_finished():
+	pass # Replace with function body.

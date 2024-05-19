@@ -1,10 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://cd6454ruaexhd"]
+[gd_scene load_steps=6 format=3 uid="uid://cd6454ruaexhd"]
 
 [ext_resource type="Texture2D" uid="uid://ddl464tueycrq" path="res://assets/SpearFishing Assets Pack/Sprites/Harpoon.png" id="1_dc7sv"]
 [ext_resource type="Script" path="res://player/harpoon_launcher.gd" id="1_trycl"]
+[ext_resource type="AudioStream" uid="uid://dhgplhut3stm1" path="res://assets/harpoon_sounds/SWSH_Airy_02.wav" id="3_ugodb"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3ngmn"]
 radius = 4.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sc5m1"]
+particle_flag_disable_z = true
+gravity = Vector3(0, -5, 0)
 
 [node name="HarpoonLauncher" type="Node2D"]
 script = ExtResource("1_trycl")
@@ -23,7 +28,6 @@ region_enabled = true
 region_rect = Rect2(2, 8, 20, 11)
 
 [node name="Harpoon" type="Area2D" parent="."]
-visible = false
 top_level = true
 position = Vector2(13, -4)
 
@@ -37,5 +41,14 @@ region_rect = Rect2(3, 2, 25, 5)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Harpoon"]
 position = Vector2(5, 0)
 shape = SubResource("CircleShape2D_3ngmn")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Harpoon"]
+position = Vector2(-3, -1)
+amount = 10
+process_material = SubResource("ParticleProcessMaterial_sc5m1")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_ugodb")
+volume_db = -15.0
 
 [connection signal="body_entered" from="Harpoon" to="." method="_on_harpoon_body_entered"]

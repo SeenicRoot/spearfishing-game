@@ -22,6 +22,7 @@ const PANIC_SPEED = 500
 	set(val):
 		max_breath = val
 		max_breath_changed.emit(val)
+@export var bubble_sounds: Array[AudioStream]
 
 var is_surfaced = true
 var can_move: bool = true
@@ -121,6 +122,7 @@ func calculate_breath(delta: float) -> void:
 func take_breath() -> void:
 	breath_particles.restart()
 	breath_particles.emitting = true
+	bubble_player.stream = bubble_sounds.pick_random()
 	var sound_length := bubble_player.stream.get_length()
 	breath_particles.explosiveness = (breath_particles.lifetime - sound_length) / breath_particles.lifetime
 	bubble_player.play()

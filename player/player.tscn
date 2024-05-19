@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bpumku3jmxiy2"]
+[gd_scene load_steps=13 format=3 uid="uid://bpumku3jmxiy2"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_yibih"]
 [ext_resource type="AudioStream" uid="uid://c43tm7vjwdcpm" path="res://assets/bubble_sounds/bubble_cut_1.wav" id="2_67ph8"]
@@ -99,20 +99,11 @@ gravity = Vector3(0, -10, 0)
 scale_max = 2.5
 color = Color(0.911958, 0.999511, 0.997121, 1)
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_pdq8e"]
-playback_mode = 1
-streams_count = 3
-stream_0/stream = ExtResource("2_67ph8")
-stream_0/weight = 1.0
-stream_1/stream = ExtResource("3_2d1sw")
-stream_1/weight = 1.0
-stream_2/stream = ExtResource("4_fww6s")
-stream_2/weight = 1.0
-
 [node name="Player" type="CharacterBody2D"]
 z_index = 3
 script = ExtResource("1_yibih")
 acceleration = 125.0
+bubble_sounds = Array[AudioStream]([ExtResource("2_67ph8"), ExtResource("3_2d1sw"), ExtResource("4_fww6s")])
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -147,7 +138,6 @@ one_shot = true
 explosiveness = 0.8
 
 [node name="BubblePlayer" type="AudioStreamPlayer" parent="."]
-stream = SubResource("AudioStreamRandomizer_pdq8e")
 volume_db = -25.0
 
 [node name="BreathTimer" type="Timer" parent="."]

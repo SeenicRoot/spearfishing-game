@@ -18,6 +18,7 @@ unique_name_in_owner = true
 mouse_filter = 2
 
 [node name="ShopUI" parent="." instance=ExtResource("4_s6nm6")]
+visible = false
 offset_top = -334.0
 offset_bottom = -334.0
 

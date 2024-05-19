@@ -31,7 +31,16 @@ var hooked_fishes: Array[Fish] = []
 
 @onready var loaded_sprite: Sprite2D = $LoadedSprite
 @onready var unloaded_sprite: Sprite2D = $UnloadedSprite
+@onready var audio_player: AudioStreamPlayer = $AudioStreamPlayer
+
 @onready var harpoon: Area2D = $Harpoon
+@onready var harpoon_particles: GPUParticles2D = $Harpoon/GPUParticles2D
+@onready var harpoon_sprite: Sprite2D = $Harpoon/Sprite2D
+
+
+func _ready() -> void:
+	harpoon_particles.emitting = false
+	harpoon_sprite.visible = false
 
 
 func _physics_process(delta: float) -> void:
@@ -46,13 +55,16 @@ func shoot() -> void:
 		return
 	unloaded_sprite.visible = true
 	loaded_sprite.visible = false
-	harpoon.visible = true
+	harpoon_sprite.visible = true
 	loaded = false
 	harpoon_velocity = harpoon_speed
 	harpoon.global_rotation = global_rotation
 	harpoon.global_position = global_position + harpoon_reset_position
 	harpoon_direction = (get_global_mouse_position() - harpoon.global_position).normalized()
 	harpoon.get_node("Sprite2D").flip_v = scale.y < 0
+	audio_player.play()
+	harpoon_particles.restart()
+	harpoon_particles.emitting = true
 
 
 func move_harpoon(delta: float) -> void:
@@ -76,7 +88,8 @@ func reel_harpoon(delta: float) -> void:
 		reeling_harpoon = false
 		unloaded_sprite.visible = false
 		loaded_sprite.visible = true
-		harpoon.visible = false
+		harpoon_sprite.visible = false
+		harpoon_particles.emitting = false
 		loaded = true
 		harpoon_velocity = 0
 		captured_fish.emit(hooked_fishes)

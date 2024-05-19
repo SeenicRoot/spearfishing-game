@@ -105,7 +105,7 @@ func update_player_depth() -> void:
 
 func _on_surface_body_entered(body: Node2D) -> void:
 	if body is Player:
-		player.is_surfaced = true
+		player.surfaced.emit()
 		show_surface = true
 		total_points += dive_points
 		dive_points = 0
@@ -119,7 +119,7 @@ func _on_surface_body_entered(body: Node2D) -> void:
 
 func _on_surface_body_exited(body: Node2D) -> void:
 	if body is Player:
-		player.is_surfaced = false
+		player.dived.emit()
 		show_surface = false
 		change_camera_view()
 		

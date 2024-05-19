@@ -82,6 +82,7 @@ func reel_harpoon(delta: float) -> void:
 	var velocity := reel_back_speed * delta
 	var new_position := harpoon.position.move_toward(reset_global_position, velocity)
 	harpoon.global_position = new_position
+	harpoon_particles.emitting = false
 
 	if distance_squared < velocity ** 2:
 		# reset harpoon once it reaches the player
@@ -89,7 +90,6 @@ func reel_harpoon(delta: float) -> void:
 		unloaded_sprite.visible = false
 		loaded_sprite.visible = true
 		harpoon_sprite.visible = false
-		harpoon_particles.emitting = false
 		loaded = true
 		harpoon_velocity = 0
 		captured_fish.emit(hooked_fishes)

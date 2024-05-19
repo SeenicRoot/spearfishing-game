@@ -46,7 +46,6 @@ shape = SubResource("CircleShape2D_3ngmn")
 position = Vector2(-3, -1)
 amount = 10
 process_material = SubResource("ParticleProcessMaterial_sc5m1")
-explosiveness = 0.5
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_ugodb")

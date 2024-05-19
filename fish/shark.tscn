@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://d150cuaa8x85h"]
+[gd_scene load_steps=22 format=3 uid="uid://bddawokjy02b3"]
 
 [ext_resource type="PhysicsMaterial" path="res://fish/fish_physics.tres" id="1_oin3p"]
 [ext_resource type="Script" path="res://fish/shark.gd" id="2_pedys"]
@@ -132,7 +132,7 @@ height = 22.0
 physics_material_override = ExtResource("1_oin3p")
 lock_rotation = true
 script = ExtResource("2_pedys")
-acceleration = 240.0
+acceleration = 200.0
 point_value = 80
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

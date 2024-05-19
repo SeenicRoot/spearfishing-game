@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://do20dt0d3whn7"]
+[gd_scene load_steps=22 format=3 uid="uid://udh18yjml5np"]
 
 [ext_resource type="PhysicsMaterial" path="res://fish/fish_physics.tres" id="1_xhgkd"]
 [ext_resource type="Script" path="res://fish/sea_angler.gd" id="2_6wuo3"]

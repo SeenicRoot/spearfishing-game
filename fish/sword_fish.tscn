@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://d0etvfk01gth1"]
+[gd_scene load_steps=14 format=3 uid="uid://bn3y4v4giiqjg"]
 
 [ext_resource type="PhysicsMaterial" path="res://fish/fish_physics.tres" id="1_iwaem"]
 [ext_resource type="Script" path="res://fish/sword_fish.gd" id="2_6qh1w"]
@@ -76,7 +76,7 @@ height = 28.0
 physics_material_override = ExtResource("1_iwaem")
 lock_rotation = true
 script = ExtResource("2_6qh1w")
-acceleration = 240.0
+acceleration = 150.0
 point_value = 100
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

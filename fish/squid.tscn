@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cg5r6b16juhy3" path="res://assets/SpearFishing Assets Pack/Sprites/Squid - 32x16.png" id="1_5m8dh"]
 [ext_resource type="Script" path="res://fish/squid.gd" id="1_7fu64"]
-[ext_resource type="PhysicsMaterial" uid="uid://0o0bcxqo1x5n" path="res://fish/fish_physics.tres" id="1_wi2ab"]
+[ext_resource type="PhysicsMaterial" path="res://fish/fish_physics.tres" id="1_wi2ab"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j6k5v"]
 atlas = ExtResource("1_5m8dh")
@@ -54,7 +54,6 @@ sprite_frames = SubResource("SpriteFrames_y08gg")
 autoplay = "default"
 frame = 3
 frame_progress = 1.0
-flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_f2pne")

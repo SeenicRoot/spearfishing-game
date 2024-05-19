@@ -10,8 +10,8 @@ var previous_direction: Vector2
 var can_move: bool = true
 var is_being_attacked: bool = false
 
-
 @onready var animated_sprite_2d := $AnimatedSprite2D as AnimatedSprite2D
+@onready var collision_shape_2d = $CollisionShape2D as CollisionShape2D
 @onready var timer := $Timer as Timer
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -35,23 +35,26 @@ func _on_timer_timeout() -> void:
 		var weight = randf()
 		direction = [Vector2.LEFT, Vector2.RIGHT, Vector2.UP, Vector2.DOWN].pick_random()
 		## Constraining basic movement to the horizontal axis
+		## x = -1 = LEFT, x = 1 = RIGHT, y = -1 = UP, y = 1 = DOWN
 		if previous_direction == direction and direction.y == 1 and weight < 0.8:
-			direction = Vector2.DOWN 
-		elif previous_direction == direction and direction.y == -1 and weight < 0.8:
 			direction = Vector2.UP
+		elif previous_direction == direction and direction.y == 1 and weight < 0.8:
+			direction = Vector2.DOWN
 		else:
 			if direction.x == -1:
 				direction = [Vector2.LEFT, Vector2.RIGHT, Vector2.UP, Vector2.DOWN].pick_random()
 			elif direction.x == 1:
 				direction = [Vector2.LEFT, Vector2.RIGHT, Vector2.UP, Vector2.DOWN].pick_random()
 			elif direction.y == -1:
-				direction = [Vector2.LEFT, Vector2.RIGHT, Vector2.UP].pick_random()
-			elif direction.y == 1:
 				direction = [Vector2.LEFT, Vector2.RIGHT, Vector2.DOWN].pick_random()
+			elif direction.y == 1:
+				direction = [Vector2.LEFT, Vector2.RIGHT, Vector2.UP].pick_random()
 		previous_direction = direction
 	
 func change_sprite_direction() -> void:
-	if direction.x == -1:
+	if direction.x < 0:
 		animated_sprite_2d.flip_h = true
+		collision_shape_2d.position.x = -(abs(collision_shape_2d.position.x))
 	else:
 		animated_sprite_2d.flip_h = false
+		collision_shape_2d.position.x = abs(collision_shape_2d.position.x)

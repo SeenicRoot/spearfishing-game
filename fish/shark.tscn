@@ -1,0 +1,150 @@
+[gd_scene load_steps=22 format=3 uid="uid://d150cuaa8x85h"]
+
+[ext_resource type="PhysicsMaterial" path="res://fish/fish_physics.tres" id="1_oin3p"]
+[ext_resource type="Script" path="res://fish/shark.gd" id="2_pedys"]
+[ext_resource type="Texture2D" uid="uid://c0rumy4rm4dbp" path="res://assets/SpearFishing Assets Pack/Sprites/Shark - 32x32/Shark.png" id="3_8qj41"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fb8ff"]
+atlas = ExtResource("3_8qj41")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gosy8"]
+atlas = ExtResource("3_8qj41")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3q4xx"]
+atlas = ExtResource("3_8qj41")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0x0vu"]
+atlas = ExtResource("3_8qj41")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_klab1"]
+atlas = ExtResource("3_8qj41")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v2d2c"]
+atlas = ExtResource("3_8qj41")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y6hf4"]
+atlas = ExtResource("3_8qj41")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fkjq5"]
+atlas = ExtResource("3_8qj41")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2sy6s"]
+atlas = ExtResource("3_8qj41")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_voc0d"]
+atlas = ExtResource("3_8qj41")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sr1bn"]
+atlas = ExtResource("3_8qj41")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g8tdk"]
+atlas = ExtResource("3_8qj41")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u7wqf"]
+atlas = ExtResource("3_8qj41")
+region = Rect2(128, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5xo3g"]
+atlas = ExtResource("3_8qj41")
+region = Rect2(160, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_46xqr"]
+atlas = ExtResource("3_8qj41")
+region = Rect2(192, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6d4vy"]
+atlas = ExtResource("3_8qj41")
+region = Rect2(224, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cjvak"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fb8ff")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gosy8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3q4xx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0x0vu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_klab1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v2d2c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y6hf4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fkjq5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2sy6s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_voc0d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sr1bn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g8tdk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u7wqf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5xo3g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_46xqr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6d4vy")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ouwn4"]
+radius = 5.0
+height = 22.0
+
+[node name="shark" type="RigidBody2D"]
+physics_material_override = ExtResource("1_oin3p")
+lock_rotation = true
+script = ExtResource("2_pedys")
+acceleration = 240.0
+point_value = 80
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_cjvak")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(4, 1)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_ouwn4")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -10,8 +10,8 @@ var previous_direction: Vector2
 var can_move: bool = true
 var is_being_attacked: bool = false
 
-
 @onready var animated_sprite_2d := $AnimatedSprite2D as AnimatedSprite2D
+@onready var collision_shape_2d = $CollisionShape2D as CollisionShape2D
 @onready var timer := $Timer as Timer
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -52,7 +52,9 @@ func _on_timer_timeout() -> void:
 		previous_direction = direction
 	
 func change_sprite_direction() -> void:
-	if direction.x == -1:
+	if direction.x < 0:
 		animated_sprite_2d.flip_h = true
+		collision_shape_2d.position.x = -(abs(collision_shape_2d.position.x))
 	else:
 		animated_sprite_2d.flip_h = false
+		collision_shape_2d.position.x = abs(collision_shape_2d.position.x)

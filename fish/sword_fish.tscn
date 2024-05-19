@@ -68,23 +68,25 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_e5rhc"]
-radius = 6.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xnk15"]
+radius = 4.0
+height = 28.0
 
 [node name="sword_fish" type="RigidBody2D"]
 physics_material_override = ExtResource("1_iwaem")
 lock_rotation = true
 script = ExtResource("2_6qh1w")
-acceleration = null
-point_value = null
+acceleration = 240.0
+point_value = 100
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_vxuyh")
 autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, -1)
-shape = SubResource("CircleShape2D_e5rhc")
+position = Vector2(-1, 1)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_xnk15")
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true

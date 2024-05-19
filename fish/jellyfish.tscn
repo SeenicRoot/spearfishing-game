@@ -1,0 +1,66 @@
+[gd_scene load_steps=10 format=3 uid="uid://c7u1ol4fw5hhm"]
+
+[ext_resource type="PhysicsMaterial" path="res://fish/fish_physics.tres" id="1_vln65"]
+[ext_resource type="Script" path="res://fish/jellyfish.gd" id="2_f6yxu"]
+[ext_resource type="Texture2D" uid="uid://peocjo75lfgj" path="res://assets/SpearFishing Assets Pack/Sprites/JellyFish - 32x16/JellyFish.png" id="3_wsxr7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1larp"]
+atlas = ExtResource("3_wsxr7")
+region = Rect2(0, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xjeyp"]
+atlas = ExtResource("3_wsxr7")
+region = Rect2(32, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_33xk0"]
+atlas = ExtResource("3_wsxr7")
+region = Rect2(64, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dvp50"]
+atlas = ExtResource("3_wsxr7")
+region = Rect2(96, 0, 32, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cjvak"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1larp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xjeyp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_33xk0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dvp50")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nwldj"]
+radius = 6.0
+
+[node name="jellyfish" type="RigidBody2D"]
+physics_material_override = ExtResource("1_vln65")
+lock_rotation = true
+script = ExtResource("2_f6yxu")
+acceleration = 30.0
+point_value = 15
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+rotation = -1.5708
+sprite_frames = SubResource("SpriteFrames_cjvak")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4)
+rotation = 1.5708
+shape = SubResource("CircleShape2D_nwldj")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

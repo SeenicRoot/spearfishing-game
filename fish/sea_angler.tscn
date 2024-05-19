@@ -1,0 +1,149 @@
+[gd_scene load_steps=22 format=3 uid="uid://do20dt0d3whn7"]
+
+[ext_resource type="PhysicsMaterial" path="res://fish/fish_physics.tres" id="1_xhgkd"]
+[ext_resource type="Script" path="res://fish/sea_angler.gd" id="2_6wuo3"]
+[ext_resource type="Texture2D" uid="uid://bi5682r8d68b6" path="res://assets/SpearFishing Assets Pack/Sprites/Sea angler - 32x32/SeaAngler.png" id="3_mlxq5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8c0ll"]
+atlas = ExtResource("3_mlxq5")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3f588"]
+atlas = ExtResource("3_mlxq5")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_337a4"]
+atlas = ExtResource("3_mlxq5")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ygseo"]
+atlas = ExtResource("3_mlxq5")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6evyf"]
+atlas = ExtResource("3_mlxq5")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jtygt"]
+atlas = ExtResource("3_mlxq5")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q6wla"]
+atlas = ExtResource("3_mlxq5")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3frrx"]
+atlas = ExtResource("3_mlxq5")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jsnud"]
+atlas = ExtResource("3_mlxq5")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_usm5f"]
+atlas = ExtResource("3_mlxq5")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jlu0l"]
+atlas = ExtResource("3_mlxq5")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xb683"]
+atlas = ExtResource("3_mlxq5")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_shjoq"]
+atlas = ExtResource("3_mlxq5")
+region = Rect2(128, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6frvg"]
+atlas = ExtResource("3_mlxq5")
+region = Rect2(160, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bpj8t"]
+atlas = ExtResource("3_mlxq5")
+region = Rect2(192, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7qw2t"]
+atlas = ExtResource("3_mlxq5")
+region = Rect2(224, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cjvak"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8c0ll")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3f588")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_337a4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ygseo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6evyf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jtygt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q6wla")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3frrx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jsnud")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_usm5f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jlu0l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xb683")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_shjoq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6frvg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bpj8t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7qw2t")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nwldj"]
+radius = 8.0
+
+[node name="sea_angler" type="RigidBody2D"]
+physics_material_override = ExtResource("1_xhgkd")
+lock_rotation = true
+script = ExtResource("2_6wuo3")
+acceleration = 180.0
+point_value = 40
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_cjvak")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, 1)
+rotation = 1.5708
+shape = SubResource("CircleShape2D_nwldj")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

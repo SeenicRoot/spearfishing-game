@@ -1,10 +1,17 @@
-[gd_scene load_steps=8 format=3 uid="uid://dinwsk6yoe6t3"]
+[gd_scene load_steps=15 format=3 uid="uid://dinwsk6yoe6t3"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_834mx"]
 [ext_resource type="TileSet" uid="uid://c6l48pd00c62j" path="res://tilemap/water_tileset.tres" id="1_855xw"]
 [ext_resource type="Script" path="res://Ocean.gd" id="2_i2g8e"]
 [ext_resource type="PackedScene" uid="uid://biip1hld5vpp0" path="res://fish/fish.tscn" id="3_jf4a3"]
 [ext_resource type="PackedScene" uid="uid://wwmhd6oa8opb" path="res://fish/squid.tscn" id="4_brv5i"]
+[ext_resource type="PackedScene" uid="uid://d0etvfk01gth1" path="res://fish/sword_fish.tscn" id="4_cgxu0"]
+[ext_resource type="PackedScene" uid="uid://c7u1ol4fw5hhm" path="res://fish/jellyfish.tscn" id="5_3xyn1"]
+[ext_resource type="PackedScene" uid="uid://c0lpssuljlj75" path="res://fish/blue_fish.tscn" id="6_uuqin"]
+[ext_resource type="PackedScene" uid="uid://die2ln70woqur" path="res://fish/red_fish.tscn" id="7_jqm35"]
+[ext_resource type="PackedScene" uid="uid://d150cuaa8x85h" path="res://fish/shark.tscn" id="8_fj5de"]
+[ext_resource type="PackedScene" uid="uid://do20dt0d3whn7" path="res://fish/sea_angler.tscn" id="9_ux54t"]
+[ext_resource type="PackedScene" uid="uid://lsefdvwh6et2" path="res://fish/saw_shark.tscn" id="10_351n8"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_m8jfr"]
 normal = Vector2(0, 1)
@@ -15,7 +22,7 @@ distance = -4.0
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_834mx")
-fish_scenes = Array[PackedScene]([ExtResource("3_jf4a3"), ExtResource("4_brv5i")])
+fish_scenes = Array[PackedScene]([ExtResource("3_jf4a3"), ExtResource("4_brv5i"), ExtResource("4_cgxu0"), ExtResource("5_3xyn1"), ExtResource("6_uuqin"), ExtResource("7_jqm35"), ExtResource("8_fj5de"), ExtResource("9_ux54t"), ExtResource("10_351n8")])
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 

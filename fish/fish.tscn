@@ -47,14 +47,14 @@ radius = 6.0
 physics_material_override = ExtResource("1_rj7dy")
 lock_rotation = true
 script = ExtResource("1_reuv0")
+point_value = 20
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(2, -2)
 sprite_frames = SubResource("SpriteFrames_aierh")
 autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, -1)
+position = Vector2(1, 0)
 shape = SubResource("CircleShape2D_e5rhc")
 
 [node name="Timer" type="Timer" parent="."]

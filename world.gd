@@ -1,7 +1,7 @@
 extends Node2D
 
 const CHUNK_SIZE = Vector2i(1000, 1000)
-const AVERAGE_SPAWN_RATE = 3
+const AVERAGE_SPAWN_RATE = 5
 
 @export var fish_scenes: Array[PackedScene]
 
@@ -13,9 +13,9 @@ var current_chunk_rect: Rect2i
 
 
 func get_chunk_rect(at: Vector2) -> Rect2i:
-	# uses math to determine where the chunk is supposed to be
-	var multiple := Vector2i(at) / CHUNK_SIZE
-	var rect_pos := multiple * CHUNK_SIZE
+	# calculates in which chunk the argument is in
+	var multiple := (at / Vector2(CHUNK_SIZE)).floor()
+	var rect_pos := Vector2i(multiple) * CHUNK_SIZE
 	return Rect2i(rect_pos, CHUNK_SIZE)
 
 
@@ -85,6 +85,10 @@ func _on_chunk_body_exited(body: Node2D) -> void:
 		return
 	
 	current_chunk_rect = get_chunk_rect(body.global_position)
+	
+	if created_chunks.is_empty():
+		return
+	
 	var surrounding_chunk_rects := get_surrounding_chunk_rects(current_chunk_rect)
 	for rect in surrounding_chunk_rects:
 		if not rect in created_chunks:

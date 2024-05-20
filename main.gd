@@ -9,10 +9,11 @@ var show_surface: bool = true
 var max_depth: float = 0.0
 
 var total_points: int
-var dive_points: int:
+var high_score: int:
 	set(val):
-		dive_points = val
-		dive_points_display.text = "Points: " + str(dive_points)
+		high_score_label.text = "Highscore: " + str(val)
+		high_score = val
+var dive_points: int = 0
 var camera_follow_player: bool = true
 var camera_offset_y: float = 0.0
 
@@ -24,7 +25,8 @@ var camera_offset_y: float = 0.0
 
 @onready var depth_meter: ProgressBar = %GameUI/%DepthMeter
 @onready var breath_meter: ProgressBar = %GameUI/%BreathMeter
-@onready var dive_points_display: Label = %GameUI/Score
+@onready var dive_points_label: Label = %GameUI/Score
+@onready var high_score_label: Label = %GameUI/Highscore
 @onready var shop_ui: Control = $ShopUI
 
 
@@ -98,8 +100,11 @@ func _on_surface_body_entered(body: Node2D) -> void:
 	if body is Player:
 		player.surfaced.emit()
 		show_surface = true
+		if dive_points > high_score:
+			high_score = dive_points
 		total_points += dive_points
 		dive_points = 0
+		high_score_label.visible = true
 		max_depth = 0
 		change_camera_view()
 		player.captured_fishes = []
@@ -113,6 +118,8 @@ func _on_surface_body_exited(body: Node2D) -> void:
 		player.dived.emit()
 		show_surface = false
 		change_camera_view()
+		dive_points_label.text = str(dive_points) + "pts"
+		high_score_label.visible = false
 		
 		randomize()
 
@@ -121,11 +128,8 @@ func _on_surface_body_exited(body: Node2D) -> void:
 
 func _on_fishes_changed(captured_fishes: Array[Dictionary]) -> void:
 	dive_points = captured_fishes.reduce(func (accum, fish): return accum + fish.value, 0)
+	dive_points_label.text = str(dive_points) + "pts"
 	
 	
-func _on_audio_player_finished() -> void:
+func _on_music_player_finished() -> void:
 	music_player.play()
-
-
-func _on_music_player_finished():
-	pass # Replace with function body.

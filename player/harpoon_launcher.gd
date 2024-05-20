@@ -35,7 +35,7 @@ var hooked_fishes: Array[Fish] = []
 @onready var audio_player: AudioStreamPlayer = $AudioStreamPlayer
 
 @onready var harpoon: Area2D = $Harpoon
-@onready var harpoon_particles: GPUParticles2D = $HarpoonParticles2D
+@onready var harpoon_particles: GPUParticles2D = $HarpoonParticles
 
 
 func _ready() -> void:

@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://bn3y4v4giiqjg"]
 
-[ext_resource type="PhysicsMaterial" path="res://fish/fish_physics.tres" id="1_iwaem"]
+[ext_resource type="PhysicsMaterial" uid="uid://0o0bcxqo1x5n" path="res://fish/fish_physics.tres" id="1_iwaem"]
 [ext_resource type="Script" path="res://fish/sword_fish.gd" id="2_6qh1w"]
 [ext_resource type="Texture2D" uid="uid://cu7ryyw8bwo6v" path="res://assets/SpearFishing Assets Pack/Sprites/SwordFish - 48x32/SwordFish.png" id="3_v1ifv"]
 

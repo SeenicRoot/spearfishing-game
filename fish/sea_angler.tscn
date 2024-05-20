@@ -1,6 +1,6 @@
 [gd_scene load_steps=22 format=3 uid="uid://udh18yjml5np"]
 
-[ext_resource type="PhysicsMaterial" path="res://fish/fish_physics.tres" id="1_xhgkd"]
+[ext_resource type="PhysicsMaterial" uid="uid://0o0bcxqo1x5n" path="res://fish/fish_physics.tres" id="1_xhgkd"]
 [ext_resource type="Script" path="res://fish/sea_angler.gd" id="2_6wuo3"]
 [ext_resource type="Texture2D" uid="uid://bi5682r8d68b6" path="res://assets/SpearFishing Assets Pack/Sprites/Sea angler - 32x32/SeaAngler.png" id="3_mlxq5"]
 

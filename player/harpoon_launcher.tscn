@@ -29,6 +29,7 @@ region_enabled = true
 region_rect = Rect2(2, 8, 20, 11)
 
 [node name="Harpoon" type="Area2D" parent="."]
+visible = false
 top_level = true
 position = Vector2(13, -4)
 
@@ -43,8 +44,8 @@ region_rect = Rect2(3, 2, 25, 5)
 position = Vector2(5, 0)
 shape = SubResource("CircleShape2D_3ngmn")
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="Harpoon"]
-position = Vector2(-3, -1)
+[node name="HarpoonParticles" type="GPUParticles2D" parent="."]
+position = Vector2(10, -5)
 amount = 10
 process_material = SubResource("ParticleProcessMaterial_sc5m1")
 

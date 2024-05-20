@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://die2ln70woqur"]
 
-[ext_resource type="PhysicsMaterial" path="res://fish/fish_physics.tres" id="1_qqnb6"]
+[ext_resource type="PhysicsMaterial" uid="uid://0o0bcxqo1x5n" path="res://fish/fish_physics.tres" id="1_qqnb6"]
 [ext_resource type="Script" path="res://fish/red_fish.gd" id="2_ugin5"]
 [ext_resource type="Texture2D" uid="uid://c5mj517lxa06u" path="res://assets/SpearFishing Assets Pack/Sprites/Fish3 - 32x16/Red.png" id="3_8im08"]
 

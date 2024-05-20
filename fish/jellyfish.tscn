@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://c7u1ol4fw5hhm"]
 
-[ext_resource type="PhysicsMaterial" path="res://fish/fish_physics.tres" id="1_vln65"]
+[ext_resource type="PhysicsMaterial" uid="uid://0o0bcxqo1x5n" path="res://fish/fish_physics.tres" id="1_vln65"]
 [ext_resource type="Script" path="res://fish/jellyfish.gd" id="2_f6yxu"]
 [ext_resource type="Texture2D" uid="uid://peocjo75lfgj" path="res://assets/SpearFishing Assets Pack/Sprites/JellyFish - 32x16/JellyFish.png" id="3_wsxr7"]
 

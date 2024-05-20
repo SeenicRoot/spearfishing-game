@@ -35,13 +35,12 @@ var hooked_fishes: Array[Fish] = []
 @onready var audio_player: AudioStreamPlayer = $AudioStreamPlayer
 
 @onready var harpoon: Area2D = $Harpoon
-@onready var harpoon_particles: GPUParticles2D = $Harpoon/GPUParticles2D
-@onready var harpoon_sprite: Sprite2D = $Harpoon/Sprite2D
+@onready var harpoon_particles: GPUParticles2D = $HarpoonParticles2D
 
 
 func _ready() -> void:
 	harpoon_particles.emitting = false
-	harpoon_sprite.visible = false
+	harpoon.visible = false
 
 
 func _physics_process(delta: float) -> void:
@@ -56,7 +55,7 @@ func shoot() -> void:
 		return
 	unloaded_sprite.visible = true
 	loaded_sprite.visible = false
-	harpoon_sprite.visible = true
+	harpoon.visible = true
 	loaded = false
 	harpoon_velocity = harpoon_speed
 	harpoon.global_rotation = global_rotation
@@ -90,7 +89,7 @@ func reel_harpoon(delta: float) -> void:
 		reeling_harpoon = false
 		unloaded_sprite.visible = false
 		loaded_sprite.visible = true
-		harpoon_sprite.visible = false
+		harpoon.visible = false
 		loaded = true
 		harpoon_velocity = 0
 		captured_fish.emit(hooked_fishes)

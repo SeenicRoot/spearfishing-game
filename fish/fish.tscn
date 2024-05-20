@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://biip1hld5vpp0"]
 
 [ext_resource type="Script" path="res://fish/fish.gd" id="1_reuv0"]
-[ext_resource type="PhysicsMaterial" path="res://fish/fish_physics.tres" id="1_rj7dy"]
+[ext_resource type="PhysicsMaterial" uid="uid://0o0bcxqo1x5n" path="res://fish/fish_physics.tres" id="1_rj7dy"]
 [ext_resource type="Texture2D" uid="uid://cuc2xp8rby7es" path="res://assets/SpearFishing Assets Pack/Sprites/Fish1 - 16x16/Orange.png" id="2_ooy0t"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_46w37"]

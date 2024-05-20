@@ -1,6 +1,6 @@
 [gd_scene load_steps=22 format=3 uid="uid://cny3v33pxy8qa"]
 
-[ext_resource type="PhysicsMaterial" path="res://fish/fish_physics.tres" id="1_fklp7"]
+[ext_resource type="PhysicsMaterial" uid="uid://0o0bcxqo1x5n" path="res://fish/fish_physics.tres" id="1_fklp7"]
 [ext_resource type="Script" path="res://fish/shark.gd" id="2_otmvp"]
 [ext_resource type="Texture2D" uid="uid://ui2o5bosqsdo" path="res://assets/SpearFishing Assets Pack/Sprites/SawShark - 48x32/SawShark.png" id="3_klevt"]
 

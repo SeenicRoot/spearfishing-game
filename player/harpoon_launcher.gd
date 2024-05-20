@@ -4,7 +4,8 @@ extends Node2D
 signal launched(harpoon: Area2D)
 signal captured_fish(fishes: Array[Fish])
 
-const DECELERATION = 10.0
+const DECELERATION_FACTOR = 0.9
+const DECELERATION_FORCE = 100
 
 @export var harpoon_speed: float = 500
 @export var reel_back_speed: float = 200
@@ -70,7 +71,7 @@ func shoot() -> void:
 func move_harpoon(delta: float) -> void:
 	if harpoon_velocity > 0:
 		harpoon.global_position += harpoon_direction * harpoon_velocity * delta
-		harpoon_velocity -= DECELERATION
+		harpoon_velocity -= (DECELERATION_FORCE + harpoon_velocity * DECELERATION_FACTOR) * delta
 	else:
 		# return the harpoon to the harpoon_speed launcher
 		reeling_harpoon = true
